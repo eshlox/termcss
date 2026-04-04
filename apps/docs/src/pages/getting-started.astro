@@ -1,0 +1,142 @@
+---
+import Base from "../layouts/Base.astro";
+import { Code } from "astro-expressive-code/components";
+import { themes, themeCount } from "../data/themes";
+---
+
+<Base title="Getting Started">
+  <h1>Getting Started</h1>
+
+  <p>term.css is a minimal, classless CSS framework with terminal aesthetics.
+  Add a single stylesheet and your HTML is styled - no classes required.</p>
+
+  <p>It's designed for blogs, docs, personal sites, and technical writing that
+  benefit from terminal-like presentation. It is not a component framework or
+  a browser TUI kit.</p>
+
+  <h2>Installation</h2>
+
+  <h3>npm</h3>
+
+  <Code lang="sh" code={`npm install term.css`} />
+
+  <p>Then import in your CSS or bundler:</p>
+
+  <Code lang="css" code={`@import "term.css";`} />
+
+  <p>Or link in HTML:</p>
+
+  <Code lang="html" code={`<link rel="stylesheet" href="node_modules/term.css/dist/term.min.css">`} />
+
+  <h3>Download</h3>
+
+  <p>Download <code>term.css</code> or <code>term.min.css</code> from the
+  <a href="https://github.com/eshlox/term.css/releases">GitHub releases page</a>
+  and include it in your project.</p>
+
+  <h2>Basic Usage</h2>
+
+  <p>term.css styles all standard HTML elements automatically. Just write
+  semantic HTML:</p>
+
+  <Code lang="html" code={`<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Site</title>
+  <link rel="stylesheet" href="node_modules/term.css/dist/term.min.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/blog">Blog</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <h1>Hello World</h1>
+    <p>Your content here.</p>
+  </main>
+</body>
+</html>`} />
+
+  <h2>Themes</h2>
+
+  <p>term.css includes a default theme and {themeCount - 1} optional themes. To use a theme, add a second stylesheet
+  after the base:</p>
+
+  <Code lang="css" code={`@import "term.css";
+@import "term.css/themes/dracula.min.css";`} />
+
+  <p>Available themes: {themes.map((t, i) => <><code>{t.name}</code>{i < themes.length - 1 ? ", " : "."}</>)}</p>
+
+  <h2>Dark / Light Mode</h2>
+
+  <p>term.css auto-detects the user's system preference via
+  <code>prefers-color-scheme</code>. To override:</p>
+
+  <Code lang="html" code={`<!-- Force dark mode -->
+<html data-theme="dark">
+
+<!-- Force light mode -->
+<html data-theme="light">`} />
+
+  <p>A simple toggle button:</p>
+
+  <Code lang="html" code={`<button onclick="
+  const html = document.documentElement;
+  const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+  html.dataset.theme = next;
+">Toggle Theme</button>`} />
+
+  <h2>Astro Integration</h2>
+
+  <p>Install the package and import in your layout:</p>
+
+  <Code lang="astro" code={`---
+// src/layouts/Base.astro
+import "term.css";
+---
+<html lang="en">
+<head></head>
+<body>
+  <slot />
+</body>
+</html>`} />
+
+  <h2>CSS Variables</h2>
+
+  <p>term.css uses 10 core CSS custom properties. Override them to customize
+  without creating a full theme file:</p>
+
+  <table>
+    <thead>
+      <tr><th>Variable</th><th>Purpose</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>--t-bg</code></td><td>Page background</td></tr>
+      <tr><td><code>--t-fg</code></td><td>Body text color</td></tr>
+      <tr><td><code>--t-muted</code></td><td>Secondary text, comments</td></tr>
+      <tr><td><code>--t-accent</code></td><td>Links, headings, primary accent</td></tr>
+      <tr><td><code>--t-accent2</code></td><td>Badges, marks, secondary accent</td></tr>
+      <tr><td><code>--t-surface</code></td><td>Code blocks, cards, inputs</td></tr>
+      <tr><td><code>--t-border</code></td><td>Borders, dividers</td></tr>
+      <tr><td><code>--t-red</code></td><td>Error, danger states</td></tr>
+      <tr><td><code>--t-yellow</code></td><td>Warning, caution states</td></tr>
+      <tr><td><code>--t-green</code></td><td>Success, confirmed states</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Next Steps</h2>
+
+  <ul>
+    <li><a href="/demo">See all elements</a> in the kitchen-sink demo</li>
+    <li><a href="/components">Browse components</a> - class-based UI patterns</li>
+    <li><a href="/themes">Theme gallery</a> - preview all shipped themes</li>
+    <li><a href="/create-a-theme">Create a theme</a> - from a single hue value</li>
+    <li><a href="/playground">Playground</a> - interactive theme builder</li>
+  </ul>
+</Base>

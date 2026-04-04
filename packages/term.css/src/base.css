@@ -1,0 +1,516 @@
+/* Base styles - layout, typography, all elements */
+
+/* --- Layout --- */
+
+html {
+  font-family: "JetBrains Mono", ui-monospace, "Cascadia Code", "Source Code Pro",
+    Menlo, Consolas, "DejaVu Sans Mono", monospace;
+  background-color: var(--t-bg);
+  color: var(--t-fg);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  font-variant-numeric: tabular-nums;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  padding-inline: 1em;
+  padding-block: 0;
+  min-height: 100dvh;
+}
+
+header {
+  margin-block-end: 0;
+}
+
+main,
+section,
+article {
+  margin-block: 1lh;
+}
+
+main {
+  flex-grow: 1;
+  margin-block-start: 0;
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  background-color: var(--t-surface);
+  padding-inline: 1em;
+  padding-block: 0.5lh;
+  margin-inline: -1em;
+  margin-block-start: auto;
+}
+
+footer > :last-child:not(:first-child) {
+  margin-inline-start: auto;
+}
+
+footer a {
+  color: inherit;
+  text-decoration: none;
+}
+
+footer > * + *::before {
+  content: "|";
+  color: var(--t-muted);
+  margin-inline: 0.75em;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  background-color: var(--t-surface);
+  padding-inline: 1em;
+  padding-block: 0.5lh;
+  margin-inline: -1em;
+  margin-block: 0;
+}
+
+nav > :last-child:not(:first-child) {
+  margin-inline-start: auto;
+}
+
+nav a {
+  color: inherit;
+  text-decoration: none;
+}
+
+nav > a::before,
+nav > ul:first-child > li:first-child a::before {
+  content: "[";
+}
+
+nav > a::after,
+nav > ul:first-child > li:first-child a::after {
+  content: "]";
+}
+
+nav > button[aria-expanded] {
+  display: none;
+}
+
+nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav > ul:not(:first-child) > li:first-child::before,
+nav li + li::before {
+  content: "|";
+  color: var(--t-muted);
+  margin-inline: 0.75em;
+}
+
+nav a[aria-current="page"] {
+  background-color: var(--t-accent);
+  color: var(--t-bg);
+  padding-inline: 0.25em;
+}
+
+/* --- Typography --- */
+
+h1 {
+  margin-block: 1lh;
+  font-weight: 700;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-block: 2lh 1lh;
+  font-weight: 700;
+}
+
+p {
+  margin-block: 1lh;
+}
+
+a {
+  color: var(--t-accent);
+  text-underline-offset: 0.15em;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+strong {
+  font-weight: 700;
+}
+
+small {
+  color: var(--t-muted);
+}
+
+mark {
+  background-color: var(--t-accent2);
+  color: var(--t-bg);
+  padding-inline: 0.25em;
+}
+
+h2 > a,
+h3 > a,
+h4 > a,
+h5 > a,
+h6 > a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* --- Code --- */
+
+code {
+  color: var(--t-accent2);
+}
+
+pre {
+  background-color: var(--t-surface);
+  padding: 0.25em 0.5em;
+  overflow-x: auto;
+  margin-block: 1lh;
+}
+
+/* Code highlighter wrappers (Expressive Code, etc.) */
+.expressive-code {
+  margin-block: 1lh;
+}
+
+pre > code {
+  color: inherit;
+}
+
+/* --- Blockquote --- */
+
+blockquote {
+  border-inline-start: 3px solid var(--t-accent);
+  padding-inline-start: 1em;
+  color: var(--t-muted);
+  font-style: italic;
+  margin-inline: 0;
+  margin-block: 1lh;
+}
+
+blockquote > p {
+  margin-block: 0;
+}
+
+/* --- Lists --- */
+
+ul,
+ol {
+  margin-block: 1lh;
+  padding-inline-start: 2em;
+  list-style-position: outside;
+}
+
+li {
+  margin-block: 0;
+}
+
+li > ul,
+li > ol {
+  margin-block: 0;
+}
+
+/* --- Table --- */
+
+table {
+  width: 100%;
+  margin-block: 1lh;
+  overflow-x: auto;
+  display: block;
+}
+
+thead {
+  border-bottom: 2px solid var(--t-border);
+}
+
+th {
+  text-align: left;
+  padding: 0.25em 1em;
+  font-weight: 700;
+}
+
+td {
+  padding: 0.25em 1em;
+  border-bottom: 1px solid var(--t-border);
+}
+
+/* --- Media --- */
+
+img {
+  height: auto;
+}
+
+iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+}
+
+figure {
+  margin-inline: 0;
+  margin-block: 1lh;
+}
+
+figcaption {
+  color: var(--t-muted);
+}
+
+/* --- Dividers & Meta --- */
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--t-border);
+  margin-block: 1lh;
+}
+
+time {
+  color: var(--t-muted);
+}
+
+/* --- Details / Summary --- */
+
+details {
+  border-inline-start: 1px solid var(--t-border);
+  padding-inline-start: 1em;
+  margin-block: 1lh;
+}
+
+summary {
+  cursor: pointer;
+  font-weight: 700;
+  list-style: none;
+}
+
+summary::before {
+  content: "▸ ";
+}
+
+details[open] > summary::before {
+  content: "▾ ";
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+details > *:not(summary) {
+  margin-block-start: 0.5lh;
+}
+
+/* --- Interactive --- */
+
+label {
+  display: block;
+  font-weight: 700;
+}
+
+button,
+input,
+textarea,
+select {
+  background: none;
+  color: var(--t-fg);
+  border: 1px solid var(--t-border);
+  padding: 0.25em 0.5em;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+input:not([type="checkbox"]):not([type="radio"]),
+textarea,
+select {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: var(--t-accent);
+  color: var(--t-bg);
+  border: 0;
+  cursor: pointer;
+  font-weight: 700;
+  width: auto;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 4.5em;
+}
+
+/* --- Checkbox in lists (task list) --- */
+
+ul:has(> li > input[type="checkbox"]) {
+  padding-inline-start: 0;
+}
+
+li:has(> input[type="checkbox"]) {
+  list-style: none;
+}
+
+li > input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  display: inline-grid;
+  place-content: center;
+  width: 1em;
+  height: 1em;
+  border: 1px solid var(--t-border);
+  background: none;
+  vertical-align: middle;
+  margin-inline-end: 0.5em;
+  cursor: pointer;
+}
+
+li > input[type="checkbox"]:checked {
+  border-color: var(--t-accent);
+  background-color: var(--t-accent);
+}
+
+li > input[type="checkbox"]:checked::after {
+  content: "x";
+  color: var(--t-bg);
+  font-weight: 700;
+  font-size: 0.75em;
+  line-height: 1;
+}
+
+/* --- kbd element --- */
+
+kbd {
+  border: 1px solid var(--t-border);
+  padding-inline: 0.25em;
+  font-family: inherit;
+}
+
+/* --- samp element --- */
+
+samp {
+  color: var(--t-muted);
+}
+
+/* --- abbr --- */
+
+abbr[title] {
+  text-decoration: underline dotted var(--t-muted);
+  cursor: help;
+}
+
+/* --- Ordered list variants --- */
+
+ol[type="I"],
+ol[type="i"] {
+  list-style-type: upper-roman;
+}
+
+ol[type="A"] {
+  list-style-type: upper-alpha;
+}
+
+ol[type="a"] {
+  list-style-type: lower-alpha;
+}
+
+ol ::marker {
+  color: var(--t-muted);
+}
+
+ul ::marker {
+  color: var(--t-muted);
+}
+
+/* --- Definition list --- */
+
+dl {
+  margin-block: 1lh;
+}
+
+dt {
+  font-weight: 700;
+  margin-block-start: 0.5lh;
+}
+
+dt:first-child {
+  margin-block-start: 0;
+}
+
+dd {
+  margin-inline-start: 2em;
+  margin-block: 0;
+}
+
+/* --- Selection --- */
+
+::selection {
+  background-color: var(--t-accent);
+  color: var(--t-bg);
+}
+
+/* --- Responsive --- */
+
+@media (max-width: 768px) {
+  body {
+    padding-inline: 0.75em;
+  }
+
+  nav,
+  footer {
+    margin-inline: -0.75em;
+    padding-inline: 0.75em;
+  }
+
+  nav {
+    flex-wrap: wrap;
+  }
+
+  nav > button[aria-expanded] {
+    display: block;
+    flex-grow: 1;
+    text-align: end;
+    cursor: pointer;
+    font-weight: 700;
+    background: none;
+    border: none;
+    color: inherit;
+    font: inherit;
+    padding: 0;
+  }
+
+  nav > button[aria-expanded]::before {
+    content: "▸ ";
+  }
+
+  nav > button[aria-expanded="true"]::before {
+    content: "▾ ";
+  }
+
+  nav > button[aria-expanded="false"] + ul {
+    display: none;
+  }
+
+  nav > button[aria-expanded="true"] + ul {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    flex-basis: 100%;
+    gap: 0.25lh;
+    padding-block-start: 0.5lh;
+  }
+
+  nav > button[aria-expanded] + ul > li:first-child::before,
+  nav > button[aria-expanded] + ul > li + li::before {
+    content: none;
+  }
+}

@@ -1,0 +1,33 @@
+/* Everforest theme for term.css */
+
+:root {
+  color-scheme: light dark;
+
+  --t-bg: light-dark(oklch(0.97 0.03 90), oklch(0.30 0.01 239));
+  --t-fg: light-dark(oklch(0.52 0.02 233), oklch(0.83 0.04 86));
+  --t-muted: light-dark(oklch(0.53 0.03 134), oklch(0.68 0.02 141));
+  --t-accent: light-dark(oklch(0.53 0.16 118), oklch(0.77 0.09 126));
+  --t-accent2: light-dark(oklch(0.63 0.11 236), oklch(0.75 0.06 186));
+  --t-surface: light-dark(oklch(0.95 0.03 98), oklch(0.33 0.02 224));
+  --t-border: light-dark(oklch(0.89 0.03 98), oklch(0.37 0.01 224));
+  --t-red: light-dark(oklch(0.56 0.20 25), oklch(0.71 0.13 20));
+  --t-yellow: light-dark(oklch(0.54 0.15 80), oklch(0.81 0.09 84));
+  --t-green: light-dark(oklch(0.53 0.16 118), oklch(0.77 0.09 126));
+
+  --t-syntax-keyword: light-dark(oklch(0.67 0.20 25), oklch(0.71 0.13 20));
+  --t-syntax-string: light-dark(oklch(0.67 0.16 118), oklch(0.77 0.09 126));
+  --t-syntax-comment: light-dark(oklch(0.74 0.03 134), oklch(0.60 0.02 141));
+  --t-syntax-function: light-dark(oklch(0.63 0.11 236), oklch(0.75 0.06 186));
+  --t-syntax-number: light-dark(oklch(0.69 0.17 341), oklch(0.75 0.08 349));
+  --t-syntax-operator: light-dark(oklch(0.71 0.17 51), oklch(0.75 0.11 45));
+  --t-syntax-type: light-dark(oklch(0.75 0.15 80), oklch(0.81 0.09 84));
+  --t-syntax-punctuation: light-dark(oklch(0.52 0.02 233), oklch(0.83 0.04 86));
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}

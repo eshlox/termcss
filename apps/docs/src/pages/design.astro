@@ -1,0 +1,420 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base title="Design">
+  <h1>Design</h1>
+
+  <p>A terminal is one of the most proven, durable text interfaces ever built.
+  It has survived every design trend for fifty years - flat design,
+  skeuomorphism, neumorphism, glassmorphism - because it never participated. It
+  just renders text, and people have read it productively for decades.</p>
+
+  <p>term.css applies that philosophy to the web. Every decision below exists
+  because we asked: "Would a terminal do this?" If the answer was no, we didn't
+  do it. That's a design constraint, not a universal principle - the web is not
+  a terminal, and we don't pretend it is. But strong constraints produce
+  coherent systems, and coherence makes a system easier to learn and predict.</p>
+
+  <p>This document explains the tradeoffs.</p>
+
+  <hr>
+
+  <h2>Classless-First Design</h2>
+
+  <p>term.css styles every standard HTML element without any classes. Write
+  <code>&lt;table&gt;</code>, get a styled table. Write
+  <code>&lt;blockquote&gt;</code>, get a styled blockquote. Write
+  <code>&lt;nav&gt;</code>, get a tmux-like status bar.</p>
+
+  <p>This is the terminal philosophy applied to HTML. In a terminal, you don't
+  add classes to your output. You write text, and the terminal renders it.
+  term.css does the same: you write HTML, and the stylesheet renders it.</p>
+
+  <p>Classes exist for five optional components
+  (<code>.t-card</code>, <code>.t-grid</code>, <code>.t-badge</code>,
+  <code>.t-callout</code>, <code>.t-table-bordered</code>) that have no
+  semantic HTML equivalent, plus four semantic color utilities
+  (<code>.t-error</code>, <code>.t-warn</code>, <code>.t-success</code>,
+  <code>.t-info</code>) that compose with badges and callouts. But the base
+  experience - headings, paragraphs, lists, tables, code, forms,
+  navigation - requires zero classes.</p>
+
+  <p>This has practical benefits:</p>
+
+  <ul>
+    <li><strong>Markdown compatibility.</strong> Markdown generates semantic HTML
+    with no classes. term.css styles it perfectly out of the box.</li>
+    <li><strong>Less to learn.</strong> You don't need to memorize a class system.
+    You just write HTML.</li>
+    <li><strong>Smaller HTML.</strong> No
+    <code>class="container mx-auto px-4 max-w-7xl"</code> on every element.
+    The HTML is clean and semantic.</li>
+  </ul>
+
+  <hr>
+
+  <h2>Full-Width Layout</h2>
+
+  <p>The conventional wisdom says body text should be 45-75 characters wide.
+  This comes from Robert Bringhurst's <em>The Elements of Typographic
+  Style</em> - a book about print. Print has fixed page widths. The web does
+  not.</p>
+
+  <p>A terminal never imposes <code>max-width: 80ch</code> on itself. The user
+  controls the window width. If they want 80 columns, they resize to 80
+  columns. If they want 120, they resize to 120. The content fills whatever
+  space the user chose.</p>
+
+  <p>The same applies to browsers. People don't read websites full-screen on
+  2560px monitors. They have windows side-by-side, or they use a laptop where
+  the screen is 1200-1400px wide. At those widths, full-width monospace text at
+  14px produces comfortable line lengths - without the framework making
+  assumptions about what's comfortable.</p>
+
+  <p>What you gain by removing <code>max-width</code>:</p>
+
+  <ul>
+    <li><strong>Less scrolling.</strong> On a code-heavy article, this is
+    significant - code blocks and paragraphs use available space instead of
+    wrapping artificially.</li>
+    <li><strong>No empty gutters.</strong> Centered narrow content with
+    decorative gutters is a web pattern, not a terminal pattern.</li>
+    <li><strong>The user is in control.</strong> The tool respects the user's
+    environment rather than imposing its own.</li>
+  </ul>
+
+  <h3>The tradeoff</h3>
+
+  <p>This is an honest trade: you give up a predictable reading measure for
+  prose in exchange for density, simplicity, and user-controlled layout.</p>
+
+  <p>On a very wide window, long lines of prose can become harder to track. A
+  <code>max-width</code> can act as protective ergonomics for those users.</p>
+
+  <p>We accept this tradeoff because term.css targets content where code and
+  prose are interleaved. Code blocks benefit enormously from wider layouts -
+  they wrap less, they're more readable, and you scroll less. For a technical
+  article with ten code blocks, the width savings compound. The prose between
+  those code blocks is usually short enough that line length doesn't become a
+  problem.</p>
+
+  <p>If your content is pure long-form prose with no code, a constrained width
+  may serve you better. term.css is optimized for the mixed case.</p>
+
+  <hr>
+
+  <h2>Single Font Size</h2>
+
+  <p>Most CSS frameworks give you six heading sizes. Headings get progressively
+  larger: h1 is 2.5rem, h2 is 2rem, down to h6 at 0.875rem. This is a print
+  convention carried to the web.</p>
+
+  <p>Terminals don't have font sizes. Every character is the same size. A
+  heading in a man page is differentiated by weight (bold) and whitespace, not
+  by being 36px in a 14px document.</p>
+
+  <p>term.css follows this: 0.875rem (14px) everywhere. Headings use
+  <code>font-weight: 700</code>. That's it.</p>
+
+  <p>Why this works:</p>
+
+  <ul>
+    <li><strong>Scannability through whitespace.</strong> Section headings
+    (h2–h6) have 2lh of space above them; h1 uses 1lh since it typically
+    follows the navigation directly. That vertical gap is the primary visual
+    signal.</li>
+    <li><strong>Consistency.</strong> When everything is the same size, nothing
+    screams for attention. The content is flat, calm, and even - like terminal
+    output.</li>
+    <li><strong>No size coupling.</strong> Font size hierarchies create coupling
+    problems. If you change the base size, every heading size needs adjustment.
+    With a single size, you change one number.</li>
+    <li><strong>Density.</strong> Large headings waste vertical space. A 36px
+    heading followed by 14px body text creates a size jump that interrupts
+    reading flow. Same-size headings maintain density.</li>
+  </ul>
+
+  <h3>The tradeoff</h3>
+
+  <p>Font size is a powerful scanning channel. Larger headings establish
+  document structure faster, create stronger entry points, and help distinguish
+  sections at a glance.</p>
+
+  <p>Open a terminal and run <code>man git</code>. You can scan that
+  document - the headings are bold, there's whitespace around them, and they're
+  in uppercase by convention. Three signals, none requiring a larger font size.
+  It works. But it works partly because the audience is practiced.</p>
+
+  <p>For a general audience, a modest size hierarchy likely helps more readers
+  find what they're looking for, faster. For the audience term.css targets -
+  people who are comfortable reading terminals - weight and whitespace are
+  sufficient.</p>
+
+  <hr>
+
+  <h2>Monospace Everywhere</h2>
+
+  <p>Most websites use a sans-serif font for body text and switch to monospace
+  for code. term.css doesn't do this.</p>
+
+  <ul>
+    <li><strong>Terminal authenticity.</strong> Terminals render everything in
+    monospace. There is no font switching. If the goal is to look like a
+    terminal, mixing fonts breaks the illusion immediately.</li>
+    <li><strong>Alignment.</strong> Monospace text aligns vertically. Tables,
+    code, lists, and body text all share the same character grid.</li>
+    <li><strong>Tabular numbers for free.</strong> Numbers in monospace are
+    already tabular - dates, prices, and version numbers line up naturally.</li>
+    <li><strong>One font to load.</strong> term.css bundles JetBrains Mono
+    (Regular, Italic, Bold - ~280KB). One font family, three variants, no
+    fallback dance between sans-serif and monospace.</li>
+  </ul>
+
+  <h3>The tradeoff</h3>
+
+  <p>For extended prose, proportional fonts usually win on raw readability.
+  Proportional type packs word shapes more naturally and reduces horizontal
+  sprawl.</p>
+
+  <p>term.css accepts a likely small readability tradeoff in prose in exchange
+  for consistency, terminal authenticity, and better code/content harmony. On a
+  page where prose and code are interleaved - which is the primary use case -
+  the consistency of a single font family outweighs the marginal readability
+  advantage of switching fonts mid-page.</p>
+
+  <hr>
+
+  <h2>Why JetBrains Mono</h2>
+
+  <p>System monospace fonts vary wildly across platforms - Menlo on macOS,
+  Consolas on Windows, DejaVu Sans Mono on Linux. They look different, they
+  space differently, and they render at different sizes.</p>
+
+  <p>term.css bundles JetBrains Mono as WOFF2 web fonts so the rendering
+  matches across every platform and browser:</p>
+
+  <ul>
+    <li>Designed for prolonged reading, not just code snippets</li>
+    <li>Programming ligatures (optional, not forced)</li>
+    <li>Used by default in JetBrains IDEs and many terminal emulators</li>
+    <li>Open source (SIL Open Font License)</li>
+    <li>~95KB per weight in WOFF2</li>
+  </ul>
+
+  <p>We use <code>font-display: swap</code> to prevent invisible text while the
+  font loads. The browser shows the system monospace fallback immediately and
+  swaps in JetBrains Mono when it's ready. The layout doesn't shift because the
+  fallback is also monospace.</p>
+
+  <hr>
+
+  <h2>Vertical Rhythm with <code>lh</code> Units</h2>
+
+  <p>Most CSS frameworks use <code>rem</code> or <code>em</code> for spacing.
+  term.css uses <code>lh</code> - a unit equal to the element's computed
+  line-height. At <code>line-height: 1.5</code> and
+  <code>font-size: 0.875rem</code>, 1lh equals 1.3125rem (21px).</p>
+
+  <ul>
+    <li><strong>Spacing is always a multiple of the line grid.</strong> 1lh
+    between paragraphs, 2lh above headings, 0.5lh for tight contexts. Content
+    stays on a consistent vertical rhythm.</li>
+    <li><strong>Self-adjusting.</strong> If you change the line-height or
+    font-size, all spacing adjusts automatically. With <code>rem</code>, you'd
+    need to recalculate every margin.</li>
+    <li><strong>Conceptual clarity.</strong> "One blank line between paragraphs"
+    is exactly 1lh. "Two blank lines before a heading" is exactly 2lh. The
+    values map directly to how you think about terminal layout - terminals
+    separate sections with blank lines.</li>
+  </ul>
+
+  <p>The <code>line-height: 1.5</code> value is the WCAG 2.1 AA minimum for
+  body text. It's also comfortable for monospace text, which needs slightly more
+  leading than proportional text because every character has the same width.</p>
+
+  <hr>
+
+  <h2>No Border-Radius</h2>
+
+  <p>Every CSS framework ships with <code>border-radius</code>. Buttons are
+  rounded, cards have rounded corners, inputs have subtle curves. This is a GUI
+  convention inherited from physical buttons.</p>
+
+  <p>Terminals are rectangular. Every element is a rectangle. There are no
+  curves. term.css never sets <code>border-radius</code> - the browser default
+  of 0 does the work.</p>
+
+  <p>Rounded corners say "this is a GUI widget." Sharp corners say "this is
+  text in a box." For a terminal-aesthetic framework, the latter is more
+  consistent.</p>
+
+  <hr>
+
+  <h2>Minimal Hover States</h2>
+
+  <p>CSS frameworks typically add prominent <code>:hover</code> states -
+  buttons change color, links get underlines or color shifts, cards lift with
+  shadow. term.css takes a minimal approach:</p>
+
+  <ul>
+    <li>Links lose their underline on hover - you already know it's a link from
+    its color and underline, the hover confirms it by removing the
+    underline</li>
+    <li>Buttons and cards have no additional hover effect</li>
+    <li>The cursor change provides basic feedback</li>
+  </ul>
+
+  <p>Terminals don't have hover states. You navigate with the keyboard. When
+  you move a cursor over text in a terminal, nothing changes.</p>
+
+  <h3>The tradeoff</h3>
+
+  <p>Hover states provide affordance, confirmation, and discoverability. Even
+  terminal-comfortable users browse the web with a mouse sometimes.</p>
+
+  <p>The philosophy isn't "zero feedback" - it's "minimum effective feedback."
+  The cursor change plus the link's existing visual distinction (color +
+  underline) means the hover state doesn't need to do heavy lifting.</p>
+
+  <p>For interactive-heavy pages with many clickable elements, more prominent
+  hover states would help discoverability. term.css is optimized for
+  content-heavy pages where the primary interaction is reading, not
+  clicking.</p>
+
+  <hr>
+
+  <h2>No Smooth Scrolling</h2>
+
+  <p><code>scroll-behavior: smooth</code> is a popular addition to CSS resets.
+  term.css explicitly does not use it.</p>
+
+  <p>Terminals don't smooth-scroll. When you press Page Down, the content
+  jumps. When you scroll with a mouse wheel, the content moves in discrete
+  line increments. There's no easing, no animation, no physics.</p>
+
+  <p>Smooth scrolling is also an accessibility concern. Users with vestibular
+  disorders can experience motion sickness from animated scrolling. The
+  <code>prefers-reduced-motion</code> media query can disable it, but not using
+  it in the first place is simpler and safer.</p>
+
+  <hr>
+
+  <h2>OKLCH Color System</h2>
+
+  <p>term.css uses OKLCH for all colors. Every theme defines 10 variables in
+  OKLCH format.</p>
+
+  <ul>
+    <li><strong>Perceptual uniformity.</strong> In OKLCH, equal steps in
+    lightness look equal. In HSL, they don't -
+    <code>hsl(60, 100%, 50%)</code> (yellow) looks much brighter than
+    <code>hsl(240, 100%, 50%)</code> (blue) despite having the same lightness
+    value. OKLCH fixes this.</li>
+    <li><strong>Theme generation from a single hue.</strong> Because lightness
+    is perceptually uniform, you can generate a complete dark and light theme by
+    fixing lightness values and rotating the hue.</li>
+    <li><strong>Predictable contrast.</strong> WCAG contrast ratios correlate
+    well with OKLCH lightness differences. If fg has L=0.85 and bg has L=0.15,
+    you know the contrast is high without calculating.</li>
+    <li><strong>Future-proof.</strong> OKLCH is the CSS color specification's
+    recommended color space. It's supported in all modern browsers.</li>
+  </ul>
+
+  <p>Lightning CSS generates fallbacks for older browsers automatically, so
+  OKLCH in source doesn't mean OKLCH-only in output.</p>
+
+  <hr>
+
+  <h2><code>light-dark()</code> for Themes</h2>
+
+  <p>Each term.css theme is a single <code>:root</code> block using the CSS
+  <code>light-dark()</code> function. Before this, each theme required four
+  blocks: <code>@media (prefers-color-scheme: dark)</code>,
+  <code>@media (prefers-color-scheme: light)</code>,
+  <code>:root[data-theme="dark"]</code>, and
+  <code>:root[data-theme="light"]</code>. Every variable was duplicated four
+  times.</p>
+
+  <p><code>light-dark()</code> collapses this to one block. The browser picks
+  the correct value based on <code>color-scheme</code>. A two-line override
+  (<code>color-scheme: light</code> or <code>color-scheme: dark</code>)
+  switches everything. The <code>data-theme</code> attribute does this for
+  manual control.</p>
+
+  <p>This reduced every theme file from ~85 lines to ~32 lines. Thirteen themes
+  times ~50 lines saved is ~650 lines of CSS eliminated with zero functionality
+  loss.</p>
+
+  <hr>
+
+  <h2>Nav and Footer as tmux Bars</h2>
+
+  <p>In a terminal multiplexer like tmux, the top and bottom of the screen have
+  thin status bars. They show the session name, window list, time, and other
+  metadata. They're dense, full-width, and use a surface color to differentiate
+  from the content area.</p>
+
+  <p>term.css styles <code>&lt;nav&gt;</code> and <code>&lt;footer&gt;</code>
+  the same way:</p>
+
+  <ul>
+    <li>Surface background for subtle contrast from the page</li>
+    <li>Horizontal flex layout with gap</li>
+    <li>Half a line-height of vertical padding, keeping the baseline grid</li>
+    <li>Links inside nav/footer are plain text, not styled links</li>
+    <li>Footer uses <code>margin-block-start: auto</code> - pushes to the
+    bottom of the viewport when content is short, like a tmux bar that always
+    sits at the terminal bottom</li>
+    <li>Last child gets <code>margin-inline-start: auto</code>, pushing it to
+    the right - exactly how tmux puts the clock on the right side of the status
+    bar</li>
+  </ul>
+
+  <hr>
+
+  <h2>No Decorative Elements</h2>
+
+  <p>term.css has no box shadows, gradients, background images, text shadows,
+  backdrop filters, animations, transitions, or rounded corners. Each of these
+  is a GUI convention. They exist to make web pages look like physical
+  objects - cards that float above the page, buttons that press down, surfaces
+  that blur what's behind them.</p>
+
+  <p>Terminals have none of this. They have text, borders made of characters,
+  and colors.</p>
+
+  <p>The result is a design that loads fast, renders instantly, and never
+  distracts from the content. There's nothing to animate, nothing to composite,
+  nothing to blur. It's just text.</p>
+
+  <hr>
+
+  <h2>Who This Is For</h2>
+
+  <p>term.css doesn't claim this approach works for every website. A marketing
+  landing page needs visual hierarchy and emotional design. A dashboard needs
+  data visualization. An e-commerce site needs trust signals and visual
+  affordances that term.css deliberately omits.</p>
+
+  <p>term.css is for content-heavy technical sites: blogs, documentation,
+  personal sites, technical writing. Places where the content is the interface
+  and everything else is overhead.</p>
+
+  <p>The target audience is people who actively enjoy terminal-like
+  presentation - who choose TUI tools over GUIs, who set their editor to
+  monospace and don't look back, who feel more at home in a man page than a
+  Medium article. Not every developer fits this description, and that's fine.</p>
+
+  <p>For a broader audience, some of these choices - same-size headings,
+  full-width prose, monospace body text - may feel unfamiliar or less
+  comfortable. That's a real cost. term.css prioritizes consistency, density,
+  and terminal authenticity over conventional web typography. If that tradeoff
+  doesn't work for your audience, it's the wrong tool.</p>
+
+  <p>Readable is not the same as universally optimal. term.css chooses a
+  reading environment that is proven, coherent, and preferred by its target
+  audience. It brings the terminal to the web - not because the web should be a
+  terminal, but because for certain content and certain readers, the terminal's
+  answers are still good ones.</p>
+</Base>

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>term.css - visual test</title>
+  <link rel="stylesheet" href="../dist/term.css">
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <header>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="/" aria-current="page">home</a></li>
+        <li><a href="/blog">blog</a></li>
+        <li><a href="/rss">rss</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <h1>term.css</h1>
+
+    <p>A minimal, classless CSS framework with terminal aesthetics.
+    This paragraph tests <strong>bold text</strong>, <em>italic text</em>,
+    <a href="#">links</a>, <code>inline code</code>, <mark>marked text</mark>,
+    and <small>small text</small>.</p>
+
+    <h2>Typography</h2>
+
+    <p>Body text in monospace at a comfortable line-height. Long paragraphs
+    wrap at full width - no max-width, the user controls column width by
+    resizing the browser, just like a terminal.</p>
+
+    <h3>Third Level Heading</h3>
+    <h4>Fourth Level Heading</h4>
+    <h5>Fifth Level Heading</h5>
+    <h6>Sixth Level Heading</h6>
+
+    <h2>Blockquote</h2>
+
+    <blockquote>
+      <p>He holds him with a skinny hand,<br>
+      'There was a ship,' quoth he.<br>
+      'Hold off! unhand me, grey-beard loon!'<br>
+      An artichoke, dropt he.</p>
+    </blockquote>
+
+    <h2>Lists</h2>
+
+    <ol>
+      <li>Carrots</li>
+      <li>Celery</li>
+      <li>Tacos
+        <ul>
+          <li>Soft</li>
+          <li>Hard</li>
+        </ul>
+      </li>
+      <li>Cucumber</li>
+    </ol>
+
+    <ul>
+      <li>Unordered item one</li>
+      <li>Unordered item two</li>
+      <li>Unordered item three</li>
+    </ul>
+
+    <h2>Table</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Power</th>
+          <th>Comment</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Carrots</td>
+          <td>9001</td>
+          <td>It's over 9000?!</td>
+        </tr>
+        <tr>
+          <td>Ramen</td>
+          <td>9002</td>
+          <td>Also over 9000?!</td>
+        </tr>
+        <tr>
+          <td>Currywurst</td>
+          <td>10000</td>
+          <td>What?!</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Code Blocks</h2>
+
+    <p>Here's a bit of code. Remember that to compile Haskell you'll need <code>ghc</code>.</p>
+
+    <pre><code>module Main where
+
+import Data.List (intercalate)
+
+hello :: String -> String
+hello s = "Hello, " <> s <> "."
+
+main :: IO ()
+main = putStrLn
+     $ intercalate "\n"
+     $ hello <$> [ "artichoke", "alcachofa" ]</code></pre>
+
+    <h2>Details / Summary</h2>
+
+    <details>
+      <summary>Click to expand</summary>
+      <p>This content is hidden by default. The details/summary element is styled
+      with a border, accent-colored summary, and custom triangle markers.</p>
+    </details>
+
+    <details open>
+      <summary>Already open section</summary>
+      <p>This section starts in the open state.</p>
+    </details>
+
+    <h2>Divider</h2>
+
+    <hr>
+
+    <p><em>Alcachofa</em>, if you were wondering, is artichoke in Spanish.</p>
+
+    <h2>Media</h2>
+
+    <figure>
+      <img src="https://placehold.co/600x300/1a1a2e/e0e0e0?text=term.css" alt="Placeholder">
+      <figcaption>A placeholder image demonstrating figure and figcaption</figcaption>
+    </figure>
+
+    <h2>Date</h2>
+
+    <p>Published on <time datetime="2026-03-05">05 March 2026</time></p>
+
+    <h2>Forms</h2>
+
+    <form>
+      <p>
+        <label for="name">Name</label><br>
+        <input type="text" id="name" placeholder="Your name">
+      </p>
+      <p>
+        <label for="email">Email</label><br>
+        <input type="email" id="email" placeholder="your@email.com">
+      </p>
+      <p>
+        <label for="message">Message</label><br>
+        <textarea id="message" placeholder="Write something..."></textarea>
+      </p>
+      <p>
+        <label for="option">Select</label><br>
+        <select id="option">
+          <option>Option 1</option>
+          <option>Option 2</option>
+          <option>Option 3</option>
+        </select>
+      </p>
+      <p><button type="submit">Submit</button></p>
+    </form>
+
+    <h2>Keyboard</h2>
+
+    <p>Press <kbd>Ctrl</kbd> + <kbd>C</kbd> to copy, <kbd>Ctrl</kbd> + <kbd>V</kbd> to paste.</p>
+
+    <h2>Sample Output</h2>
+
+    <p>The command returned: <samp>Hello, world!</samp></p>
+
+    <h2>Blog Post List</h2>
+
+    <ul>
+      <li>
+        <a href="#">Managing GitHub repositories and secrets with OpenTofu</a><br>
+        <small><time datetime="2026-03-03">03 March 2026</time></small>
+      </li>
+      <li>
+        <a href="#">What if AI doesn't kill programming jobs?</a><br>
+        <small><time datetime="2026-02-28">28 February 2026</time></small>
+      </li>
+      <li>
+        <a href="#">Why I stay with WebStorm</a><br>
+        <small><time datetime="2026-02-22">22 February 2026</time></small>
+      </li>
+    </ul>
+
+    <h2>Components</h2>
+
+    <h3>Cards &amp; Grid</h3>
+
+    <div class="t-grid">
+      <div class="t-card">
+        <h4>Card One</h4>
+        <p>A simple card in a responsive grid.</p>
+      </div>
+      <div class="t-card">
+        <h4>Card Two</h4>
+        <p>Cards use surface background and border.</p>
+      </div>
+      <div class="t-card" style="--t-card-border: var(--t-accent)">
+        <h4>Accent Border</h4>
+        <p>Custom border via CSS variable.</p>
+      </div>
+    </div>
+
+    <h3>Badge</h3>
+
+    <p>
+      <span class="t-badge">STATUS</span>
+      <span class="t-badge t-error">ERROR</span>
+      <span class="t-badge t-warn">WARN</span>
+      <span class="t-badge t-success">OK</span>
+      <span class="t-badge t-info">INFO</span>
+    </p>
+
+    <h3>Callout</h3>
+
+    <div class="t-callout t-info">
+      <strong>Note</strong>
+      <p>This is a callout for general information.</p>
+    </div>
+
+    <div class="t-callout t-success">
+      <strong>Tip</strong>
+      <p>A helpful tip for the reader.</p>
+    </div>
+
+    <div class="t-callout t-warn">
+      <strong>Warning</strong>
+      <p>Something to watch out for.</p>
+    </div>
+
+    <div class="t-callout t-error">
+      <strong>Danger</strong>
+      <p>This action is destructive and cannot be undone.</p>
+    </div>
+
+    <h3>Semantic Colors</h3>
+
+    <p>
+      <span class="t-error">ERROR: Connection refused</span><br>
+      <span class="t-warn">WARN: Deprecated API usage</span><br>
+      <span class="t-success">OK: All tests passed</span><br>
+      <span class="t-info">INFO: Server started on port 3000</span>
+    </p>
+
+    <h3>Bordered Table</h3>
+
+    <table class="t-table-bordered">
+      <thead>
+        <tr>
+          <th>Command</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>build</td>
+          <td>Compile CSS to dist/</td>
+        </tr>
+        <tr>
+          <td>dev</td>
+          <td>Start dev server</td>
+        </tr>
+        <tr>
+          <td>theme:generate</td>
+          <td>Generate theme from hue</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Task List (Checkboxes)</h3>
+
+    <ul>
+      <li><input type="checkbox" checked> Completed task</li>
+      <li><input type="checkbox" checked> Another done</li>
+      <li><input type="checkbox"> Pending task</li>
+    </ul>
+
+    <h3>Definition List</h3>
+
+    <dl>
+      <dt>term.css</dt>
+      <dd>A minimal CSS framework with terminal aesthetics</dd>
+      <dt>OKLCH</dt>
+      <dd>A perceptually uniform color space used for theming</dd>
+    </dl>
+
+    <h3>Abbreviation</h3>
+
+    <p>We use <abbr title="OK Lightness Chroma Hue">OKLCH</abbr> for all color values.</p>
+
+  </main>
+
+  <footer>
+    <span class="t-badge">term.css</span>
+    <span>v0.1.0</span>
+    <span>MIT</span>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,11 @@
+/* term.css - minimal, classless CSS with terminal aesthetics */
+
+@import "./font.css";
+@import "./reset.css";
+@import "./themes/default.css";
+@import "./syntax.css";
+@import "./base.css";
+@import "./components.css";
+@import "./accessibility.css";
+@import "./scrollbar.css";
+@import "./print.css";

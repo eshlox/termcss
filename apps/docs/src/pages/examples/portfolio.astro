@@ -1,0 +1,137 @@
+---
+import Example from "../../layouts/Example.astro";
+---
+
+<Example title="Sam Rivera - Designer & Developer" source="portfolio">
+  <header slot="nav">
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="#" aria-current="page">sam rivera</a></li>
+        <li><a href="#about">about</a></li>
+        <li><a href="#work">work</a></li>
+        <li><a href="#skills">skills</a></li>
+        <li><a href="#contact">contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section>
+    <h1>Sam Rivera</h1>
+    <p><strong>Designer & Developer</strong></p>
+    <p>Crafting digital experiences at the intersection of design and code. I believe the best products emerge when aesthetics and engineering share the same table.</p>
+  </section>
+
+  <section id="about">
+    <h2>About</h2>
+    <p>I'm a designer and developer with 8 years of experience building for the web and beyond. I've worked at startups where speed was everything, agencies where polish was paramount, and now I freelance - choosing projects where I can do both well.</p>
+    <p>I'm passionate about design systems, accessibility, and open source. I believe good defaults beat clever customization, and that constraints breed creativity. Based in Berlin, available worldwide.</p>
+  </section>
+
+  <section id="work">
+    <h2>Work</h2>
+    <div class="t-grid">
+      <div class="t-card">
+        <h3>Meridian Design System</h3>
+        <p>
+          <span class="t-badge">FIGMA</span>
+          <span class="t-badge">REACT</span>
+          <span class="t-badge">TOKENS</span>
+        </p>
+        <p>A comprehensive design system for a fintech startup - tokens, components, and documentation that scaled from 3 to 40 engineers.</p>
+        <p><a href="#">View project &rarr;</a></p>
+      </div>
+      <div class="t-card">
+        <h3>Tidal Music App</h3>
+        <p>
+          <span class="t-badge">SWIFT</span>
+          <span class="t-badge">SWIFTUI</span>
+        </p>
+        <p>An iOS music player with spatial audio support and a minimal interface that stays out of the way.</p>
+        <p><a href="#">View project &rarr;</a></p>
+      </div>
+      <div class="t-card">
+        <h3>Canopy Analytics</h3>
+        <p>
+          <span class="t-badge">TYPESCRIPT</span>
+          <span class="t-badge">D3</span>
+        </p>
+        <p>Real-time data visualization dashboard for monitoring infrastructure metrics across distributed systems.</p>
+        <p><a href="#">View project &rarr;</a></p>
+      </div>
+      <div class="t-card">
+        <h3>Nomad</h3>
+        <p>
+          <span class="t-badge">ASTRO</span>
+          <span class="t-badge">CSS</span>
+        </p>
+        <p>A minimal travel blog theme focused on photography and long-form writing. Fast, accessible, zero JavaScript.</p>
+        <p><a href="#">View project &rarr;</a></p>
+      </div>
+      <div class="t-card">
+        <h3>Inkwell</h3>
+        <p>
+          <span class="t-badge">RUST</span>
+          <span class="t-badge">WASM</span>
+        </p>
+        <p>A browser-based markdown editor compiled to WebAssembly for near-native performance and offline support.</p>
+        <p><a href="#">View project &rarr;</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="t-grid">
+      <div class="t-card">
+        <h3>Design</h3>
+        <ul>
+          <li>UI/UX Design</li>
+          <li>Design Systems</li>
+          <li>Prototyping</li>
+          <li>User Research</li>
+          <li>Typography</li>
+          <li>Accessibility</li>
+        </ul>
+      </div>
+      <div class="t-card">
+        <h3>Development</h3>
+        <ul>
+          <li>TypeScript</li>
+          <li>React</li>
+          <li>Swift</li>
+          <li>Rust</li>
+          <li>CSS/HTML</li>
+          <li>Node.js</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>I'm always open to interesting projects and collaborations. Whether you need a design system, a polished UI, or a full-stack build - let's talk.</p>
+    <p>Reach me at <a href="mailto:sam@samrivera.dev">sam@samrivera.dev</a>, or use the form below.</p>
+    <form>
+      <p>
+        <label for="name">Name</label><br>
+        <input type="text" id="name" name="name" required>
+      </p>
+      <p>
+        <label for="email">Email</label><br>
+        <input type="email" id="email" name="email" required>
+      </p>
+      <p>
+        <label for="message">Message</label><br>
+        <textarea id="message" name="message" rows="5" required></textarea>
+      </p>
+      <p><button type="submit">Send message</button></p>
+    </form>
+  </section>
+
+  <footer slot="footer">
+    <span>&copy; 2026 Sam Rivera</span>
+    <a href="#">GitHub</a>
+    <a href="#">Dribbble</a>
+    <a href="#">Email</a>
+  </footer>
+</Example>

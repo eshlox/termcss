@@ -1,0 +1,50 @@
+/* Print styles - light background, visible URLs */
+
+@media print {
+  :root {
+    --t-bg: #fff;
+    --t-fg: #000;
+    --t-muted: #444;
+    --t-accent: #000;
+    --t-accent2: #666;
+    --t-surface: #f5f5f5;
+    --t-border: #ccc;
+  }
+
+  body {
+    max-width: 100%;
+    padding: 0;
+  }
+
+  h1 {
+    color: var(--t-fg);
+  }
+
+  a {
+    color: var(--t-fg);
+    text-decoration: underline;
+  }
+
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    color: var(--t-muted);
+  }
+
+  a[href^="#"]::after {
+    content: "";
+  }
+
+  pre {
+    white-space: pre-wrap;
+    border: 1px solid var(--t-border);
+  }
+
+  nav,
+  .skip-link {
+    display: none;
+  }
+
+  img {
+    max-width: 100% !important;
+  }
+}

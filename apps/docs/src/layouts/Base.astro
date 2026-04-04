@@ -1,0 +1,57 @@
+---
+import "term.css";
+
+interface Props {
+  title: string;
+  theme?: string;
+}
+
+const { title, theme } = Astro.props;
+const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
+---
+
+<!DOCTYPE html>
+<html lang="en" data-theme={theme}>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title} - term.css</title>
+  <meta name="description" content="A minimal, classless CSS framework with terminal aesthetics">
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <header>
+    <nav aria-label="Main">
+      <a href="/" aria-current={currentPath === "/" ? "page" : undefined}>term.css</a>
+      <button type="button" aria-expanded="false" aria-controls="nav-menu">menu</button>
+      <ul id="nav-menu">
+        <li><a href="/demo" aria-current={currentPath === "/demo" ? "page" : undefined}>demo</a></li>
+        <li><a href="/components" aria-current={currentPath === "/components" ? "page" : undefined}>components</a></li>
+        <li><a href="/themes" aria-current={currentPath === "/themes" ? "page" : undefined}>themes</a></li>
+        <li><a href="/playground" aria-current={currentPath === "/playground" ? "page" : undefined}>playground</a></li>
+        <li><a href="/examples" aria-current={currentPath.startsWith("/examples") ? "page" : undefined}>examples</a></li>
+        <li><a href="/design" aria-current={currentPath === "/design" ? "page" : undefined}>design</a></li>
+        <li><a href="/getting-started" aria-current={currentPath === "/getting-started" ? "page" : undefined}>docs</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <slot />
+  </main>
+
+  <footer>
+    <span>&copy; 2026 term.css</span>
+    <span>MIT License</span>
+    <a href="https://github.com/eshlox/term.css">GitHub</a>
+  </footer>
+  <script>
+    document.querySelector("nav > button[aria-expanded]")?.addEventListener("click", (e) => {
+      const btn = e.currentTarget as HTMLButtonElement;
+      const expanded = btn.getAttribute("aria-expanded") === "true";
+      btn.setAttribute("aria-expanded", String(!expanded));
+    });
+  </script>
+</body>
+</html>

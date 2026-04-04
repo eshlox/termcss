@@ -1,0 +1,142 @@
+---
+import Base from "../layouts/Base.astro";
+import { Code } from "astro-expressive-code/components";
+---
+
+<Base title="Create a Theme">
+  <h1>Create a Theme</h1>
+
+  <p>term.css themes override 10 CSS custom properties. You can create a theme
+  manually or use the CLI generator.</p>
+
+  <h2>Theme File Structure</h2>
+
+  <p>A theme file overrides variables in a single <code>:root</code> block using
+  <code>light-dark()</code> for both modes:</p>
+
+  <Code lang="css" code={`/* my-theme.css */
+
+:root {
+  color-scheme: light dark;
+
+  --t-bg: light-dark(oklch(0.97 0.01 200), oklch(0.15 0.02 200));
+  --t-fg: light-dark(oklch(0.20 0.02 200), oklch(0.85 0.02 200));
+  --t-muted: light-dark(oklch(0.45 0.02 200), oklch(0.58 0.02 200));
+  --t-accent: light-dark(oklch(0.45 0.15 200), oklch(0.75 0.15 200));
+  --t-accent2: light-dark(oklch(0.50 0.15 200), oklch(0.65 0.15 200));
+  --t-surface: light-dark(oklch(0.93 0.01 200), oklch(0.20 0.02 200));
+  --t-border: light-dark(oklch(0.80 0.01 200), oklch(0.30 0.02 200));
+  --t-red: light-dark(oklch(0.55 0.20 25), oklch(0.65 0.20 25));
+  --t-yellow: light-dark(oklch(0.55 0.16 85), oklch(0.78 0.16 85));
+  --t-green: light-dark(oklch(0.50 0.17 145), oklch(0.72 0.19 145));
+}
+
+/* Manual overrides */
+:root[data-theme="light"] { color-scheme: light; }
+:root[data-theme="dark"] { color-scheme: dark; }`} />
+
+  <h2>Variable Reference</h2>
+
+  <table>
+    <thead>
+      <tr><th>Variable</th><th>Purpose</th><th>Dark L range</th><th>Light L range</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>--t-bg</code></td><td>Page background</td><td>0.12-0.20</td><td>0.95-0.98</td></tr>
+      <tr><td><code>--t-fg</code></td><td>Body text</td><td>0.82-0.90</td><td>0.15-0.25</td></tr>
+      <tr><td><code>--t-muted</code></td><td>Secondary text</td><td>0.55-0.62</td><td>0.40-0.50</td></tr>
+      <tr><td><code>--t-accent</code></td><td>Links, headings</td><td>0.70-0.80</td><td>0.40-0.50</td></tr>
+      <tr><td><code>--t-accent2</code></td><td>Badges, marks</td><td>0.60-0.70</td><td>0.45-0.55</td></tr>
+      <tr><td><code>--t-surface</code></td><td>Code, cards</td><td>0.18-0.25</td><td>0.90-0.95</td></tr>
+      <tr><td><code>--t-border</code></td><td>Borders</td><td>0.28-0.35</td><td>0.75-0.85</td></tr>
+      <tr><td><code>--t-red</code></td><td>Error, danger</td><td>0.53-0.60</td><td>0.50-0.58</td></tr>
+      <tr><td><code>--t-yellow</code></td><td>Warning, caution</td><td>0.70-0.80</td><td>0.50-0.58</td></tr>
+      <tr><td><code>--t-green</code></td><td>Success, confirmed</td><td>0.65-0.75</td><td>0.45-0.55</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Contrast Requirements</h2>
+
+  <div class="t-callout">
+    <strong>Important</strong>
+    <p>All themes must meet WCAG 2.1 AA contrast ratios.</p>
+  </div>
+
+  <table>
+    <thead>
+      <tr><th>Pair</th><th>Minimum Ratio</th><th>Standard</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>fg / bg</td><td>4.5:1</td><td>AA normal text</td></tr>
+      <tr><td>muted / bg</td><td>4.5:1</td><td>AA normal text</td></tr>
+      <tr><td>accent / bg</td><td>4.5:1</td><td>AA normal text</td></tr>
+      <tr><td>red / bg</td><td>4.5:1</td><td>AA normal text</td></tr>
+      <tr><td>yellow / bg</td><td>4.5:1</td><td>AA normal text</td></tr>
+      <tr><td>green / bg</td><td>4.5:1</td><td>AA normal text</td></tr>
+    </tbody>
+  </table>
+
+  <p>The CLI generator validates these automatically and exits with an error
+  if any ratio fails.</p>
+
+  <h2>CLI Generator</h2>
+
+  <p>Generate a complete theme from a single hue value:</p>
+
+  <Code lang="sh" code={`npx termcss --hue 200 --name ocean`} />
+
+  <p>Options:</p>
+
+  <dl>
+    <dt>FLAGS</dt>
+    <dd><code>--hue &lt;0-360&gt;</code> Base hue for the theme (required)</dd>
+    <dd><code>--name &lt;name&gt;</code> Theme name (required)</dd>
+    <dd><code>--chroma &lt;0-0.4&gt;</code> Color intensity (default: 0.15)</dd>
+    <dd><code>--out &lt;path&gt;</code> Output path (default: ./&lt;name&gt;.css)</dd>
+  </dl>
+
+  <p>The generator creates both dark and light mode values with consistent
+  lightness steps, and validates WCAG AA contrast for every color pair.</p>
+
+  <h3>Example</h3>
+
+  <Code lang="sh" code={`# Generate an ocean theme
+npx termcss --hue 200 --name ocean
+
+# Generate a warm theme with lower chroma
+npx termcss --hue 30 --name warm --chroma 0.10
+
+# Output to a custom path
+npx termcss --hue 280 --name purple --out ./my-theme.css`} />
+
+  <h2>OKLCH Color Space</h2>
+
+  <p>term.css uses <a href="https://oklch.com">OKLCH</a> for all colors.
+  OKLCH is a perceptually uniform color space where:</p>
+
+  <ul>
+    <li><strong>L</strong> (Lightness): 0 = black, 1 = white. Equal steps look equal.</li>
+    <li><strong>C</strong> (Chroma): 0 = gray, higher = more saturated.</li>
+    <li><strong>H</strong> (Hue): 0-360 degree color wheel.</li>
+  </ul>
+
+  <p>This makes it possible to generate mathematically correct themes by
+  fixing lightness values and rotating the hue.</p>
+
+  <h2>Community Themes</h2>
+
+  <p>To submit a theme:</p>
+
+  <ol>
+    <li>Create a theme file in <code>src/themes/</code></li>
+    <li>Ensure all contrast ratios pass (<code>pnpm check:contrast</code> validates all shipped themes)</li>
+    <li>Test in both dark and light modes</li>
+    <li>Submit a PR to the <a href="https://github.com/eshlox/term.css">GitHub repo</a></li>
+  </ol>
+
+  <div class="t-callout">
+    <strong>Tip</strong>
+    <p>Try the <a href="/playground">interactive playground</a> to experiment
+    with hue and chroma values before generating a theme file.</p>
+  </div>
+</Base>

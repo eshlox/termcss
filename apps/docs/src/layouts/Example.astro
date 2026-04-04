@@ -1,0 +1,31 @@
+---
+import "term.css";
+
+interface Props {
+  title: string;
+  source: string;
+}
+
+const { title, source } = Astro.props;
+const sourceUrl = `https://github.com/eshlox/term.css/blob/main/apps/docs/src/pages/examples/${source}.astro`;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title}</title>
+</head>
+<body>
+  <small><a href="/examples">&larr; Back to examples</a> · <a href={sourceUrl}>View source on GitHub</a></small>
+
+  <slot name="nav" />
+
+  <main>
+    <slot />
+  </main>
+
+  <slot name="footer" />
+</body>
+</html>

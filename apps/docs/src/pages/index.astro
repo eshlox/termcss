@@ -1,0 +1,38 @@
+---
+import Base from "../layouts/Base.astro";
+import { Code } from "astro-expressive-code/components";
+import { themeCount } from "../data/themes";
+---
+
+<Base title="Home">
+  <h1>term.css</h1>
+
+  <p>A minimal, classless CSS framework with terminal aesthetics.
+  Write semantic HTML. Get a styled page.</p>
+
+  <h2>Quick Start</h2>
+
+  <Code lang="sh" code={`npm install term.css`} />
+
+  <Code lang="css" code={`@import "term.css";`} />
+
+  <h2>Features</h2>
+
+  <ul>
+    <li><strong>Classless</strong> - styles every HTML element, no classes needed</li>
+    <li><strong>Terminal aesthetic</strong> - monospace, dark-first, terminal-inspired</li>
+    <li><strong>Themeable</strong> - 10 CSS variables, composable theme files</li>
+    <li><strong>Accessible</strong> - WCAG 2.1 AA, focus rings, reduced motion</li>
+    <li><strong>Tiny</strong> - single CSS file, no JavaScript</li>
+    <li><strong>Responsive</strong> - works on all screen sizes</li>
+    <li><strong>Dark &amp; Light</strong> - auto-detects, or set manually</li>
+  </ul>
+
+  <h2>Themes</h2>
+
+  <p>Ships with a default theme plus {themeCount - 1} popular schemes. <a href="/themes">Browse all themes</a> or
+  <a href="/create-a-theme">create your own</a> from a single hue value.</p>
+
+  <Code lang="css" code={`@import "term.css";
+@import "term.css/themes/dracula.min.css";`} />
+</Base>

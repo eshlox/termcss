@@ -1,0 +1,25 @@
+{
+  "private": true,
+  "packageManager": "pnpm@10.32.1",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "lightningcss-cli",
+      "sharp"
+    ]
+  },
+  "scripts": {
+    "build": "pnpm --filter term.css build && pnpm --filter term.css-docs build",
+    "build:css": "pnpm --filter term.css build:css",
+    "build:themes": "pnpm --filter term.css build:themes",
+    "dev": "pnpm --filter term.css-docs dev",
+    "test": "node --test packages/term.css/scripts/*.test.js scripts/*.test.mjs",
+    "check": "node scripts/check-consistency.mjs && node scripts/check-contrast.mjs",
+    "check:contrast": "node scripts/check-contrast.mjs",
+    "changeset": "changeset",
+    "release": "pnpm --filter term.css build && changeset publish"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.30.0"
+  }
+}

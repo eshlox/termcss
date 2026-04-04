@@ -1,0 +1,316 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base title="Playground">
+  <h1>Theme Playground</h1>
+
+  <p>Adjust the sliders to create a custom theme. Both light and dark modes update in real-time.</p>
+
+  <h2>Controls</h2>
+
+  <div class="t-card">
+    <p>
+      <label for="hue-slider"><strong>Hue</strong> <span id="hue-value">250</span></label><br>
+      <input type="range" id="hue-slider" min="0" max="360" value="250" style="width:100%">
+    </p>
+    <p>
+      <label for="chroma-slider"><strong>Chroma</strong> <span id="chroma-value">0.15</span></label><br>
+      <input type="range" id="chroma-slider" min="0" max="40" value="15" style="width:100%">
+    </p>
+  </div>
+
+  <h2>Preview</h2>
+
+  <div id="preview-grid">
+    <div>
+      <p><strong>Light</strong></p>
+      <iframe id="frame-light" title="Light mode preview"></iframe>
+    </div>
+    <div>
+      <p><strong>Dark</strong></p>
+      <iframe id="frame-dark" title="Dark mode preview"></iframe>
+    </div>
+  </div>
+
+  <h2>Generated CSS</h2>
+
+  <pre><code id="generated-css">/* Adjust sliders above */</code></pre>
+
+  <button id="copy-btn">Copy CSS to Clipboard</button>
+</Base>
+
+<style>
+  #preview-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1lh;
+  }
+  #preview-grid iframe {
+    width: 100%;
+    border: 1px solid var(--t-border);
+  }
+  @media (max-width: 768px) {
+    #preview-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  const hueSlider = document.getElementById("hue-slider") as HTMLInputElement;
+  const chromaSlider = document.getElementById("chroma-slider") as HTMLInputElement;
+  const hueValue = document.getElementById("hue-value")!;
+  const chromaValue = document.getElementById("chroma-value")!;
+  const output = document.getElementById("generated-css")!;
+  const copyBtn = document.getElementById("copy-btn")!;
+  const frameLight = document.getElementById("frame-light") as HTMLIFrameElement;
+  const frameDark = document.getElementById("frame-dark") as HTMLIFrameElement;
+
+  const previewHTML = `
+<blockquote>
+  <p>A blockquote with muted text and accent border.</p>
+</blockquote>
+<p>
+  <span class="t-badge">STATUS</span>
+  <span class="t-badge t-error">ERROR</span>
+  <span class="t-badge t-warn">WARN</span>
+  <span class="t-badge t-success">OK</span>
+  <span class="t-badge t-info">INFO</span>
+</p>
+<p>
+  <span class="t-error">ERROR: Connection refused</span><br>
+  <span class="t-warn">WARN: Deprecated API usage</span><br>
+  <span class="t-success">OK: All tests passed</span><br>
+  <span class="t-info">INFO: Server started on port 3000</span>
+</p>
+<pre><code>function greet(name) {
+  return "Hello, " + name + "!";
+}
+console.log(greet("world"));</code></pre>
+<div class="t-callout t-info">
+  <strong>Tip</strong>
+  <p>This callout previews the accent color on borders.</p>
+</div>
+<div class="t-callout t-warn">
+  <strong>Warning</strong>
+  <p>Something to watch out for.</p>
+</div>
+<div class="t-card">
+  <h3>Sample Card</h3>
+  <p>Testing surface and border colors.</p>
+</div>`;
+
+  const swatchNames = ["bg", "fg", "muted", "accent", "accent2", "surface", "border", "red", "yellow", "green"];
+
+  function buildSwatches(): string {
+    return `<div style="display:flex;flex-wrap:wrap;gap:0.5em;margin-block:1em;">${swatchNames
+      .map(
+        (name) =>
+          `<div data-swatch="${name}" style="width:4em;height:4em;border:1px solid var(--t-border);display:flex;align-items:center;justify-content:center;font-size:0.7em;">${name}</div>`,
+      )
+      .join("")}</div>`;
+  }
+
+  function buildSrcdoc(mode: "light" | "dark"): string {
+    return `<!DOCTYPE html>
+<html lang="en" data-theme="${mode}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/term.min.css">
+  <style id="theme-overrides"></style>
+  <style>
+    body { padding: 1em; margin: 0; }
+  </style>
+</head>
+<body>${buildSwatches()}${previewHTML}</body>
+</html>`;
+  }
+
+  frameLight.srcdoc = buildSrcdoc("light");
+  frameDark.srcdoc = buildSrcdoc("dark");
+
+  // Semantic colors use fixed hue/chroma (not derived from slider)
+  const semanticColors = {
+    red:    { light: { L: 0.55, C: 0.20, H: 25 }, dark: { L: 0.65, C: 0.20, H: 25 } },
+    yellow: { light: { L: 0.55, C: 0.16, H: 85 }, dark: { L: 0.78, C: 0.16, H: 85 } },
+    green:  { light: { L: 0.50, C: 0.17, H: 145 }, dark: { L: 0.72, C: 0.19, H: 145 } },
+  };
+
+  const dark = {
+    bg:      { L: 0.15, C: 0.02 },
+    fg:      { L: 0.85, C: 0.02 },
+    muted:   { L: 0.58, C: 0.02 },
+    accent:  { L: 0.75 },
+    accent2: { L: 0.65 },
+    surface: { L: 0.20, C: 0.02 },
+    border:  { L: 0.30, C: 0.02 },
+  } as Record<string, { L: number; C?: number; chromaScale?: number }>;
+
+  const light = {
+    bg:      { L: 0.97, C: 0.01 },
+    fg:      { L: 0.20, C: 0.02 },
+    muted:   { L: 0.45, C: 0.02 },
+    accent:  { L: 0.45 },
+    accent2: { L: 0.50, chromaScale: 0.8 },
+    surface: { L: 0.93, C: 0.01 },
+    border:  { L: 0.80, C: 0.01 },
+  } as Record<string, { L: number; C?: number; chromaScale?: number }>;
+
+  function resolveChroma(val: { C?: number; chromaScale?: number }, chroma: number): number {
+    if (val.C !== undefined) return val.C;
+    return chroma * (val.chromaScale ?? 1);
+  }
+
+  function oklch(l: number, c: number, h: number): string {
+    return `oklch(${l} ${c.toFixed(2)} ${h})`;
+  }
+
+  // Syntax colors - hue-rotated from base hue (matches generate-theme.js)
+  function syntaxHues(hue: number) {
+    return {
+      keyword:     (hue + 145) % 360,
+      string:      (hue + 340) % 360,
+      comment:     hue,
+      function:    (hue + 275) % 360,
+      number:      (hue + 245) % 360,
+      operator:    (hue + 35) % 360,
+      type:        (hue + 55) % 360,
+    };
+  }
+
+  function buildOverrideCSS(
+    vars: Record<string, { L: number; C?: number; chromaScale?: number }>,
+    chroma: number,
+    hue: number,
+    mode: "light" | "dark",
+  ): string {
+    let css = `:root[data-theme="${mode}"] {\n  color-scheme: ${mode};\n`;
+    for (const [key, val] of Object.entries(vars)) {
+      const c = resolveChroma(val, chroma);
+      css += `  --t-${key}: ${oklch(val.L, c, hue)};\n`;
+    }
+    for (const [key, val] of Object.entries(semanticColors)) {
+      const sv = mode === "light" ? val.light : val.dark;
+      css += `  --t-${key}: ${oklch(sv.L, sv.C, sv.H)};\n`;
+    }
+    const syntaxL = mode === "light" ? 0.45 : 0.75;
+    for (const [token, tokenHue] of Object.entries(syntaxHues(hue))) {
+      css += `  --t-syntax-${token}: ${oklch(syntaxL, chroma, tokenHue)};\n`;
+    }
+    css += `  --t-syntax-punctuation: var(--t-muted);\n`;
+    css += `}\n`;
+    return css;
+  }
+
+  function updateSwatches(
+    doc: Document,
+    vars: Record<string, { L: number; C?: number; chromaScale?: number }>,
+    chroma: number,
+    hue: number,
+    mode: "light" | "dark",
+  ) {
+    for (const [key, val] of Object.entries(vars)) {
+      const c = resolveChroma(val, chroma);
+      const color = oklch(val.L, c, hue);
+      const swatch = doc.querySelector(`[data-swatch="${key}"]`) as HTMLElement | null;
+      if (swatch) {
+        swatch.style.backgroundColor = color;
+        swatch.style.color = val.L > 0.5 ? "black" : "white";
+      }
+    }
+    for (const [key, val] of Object.entries(semanticColors)) {
+      const sv = mode === "light" ? val.light : val.dark;
+      const color = oklch(sv.L, sv.C, sv.H);
+      const swatch = doc.querySelector(`[data-swatch="${key}"]`) as HTMLElement | null;
+      if (swatch) {
+        swatch.style.backgroundColor = color;
+        swatch.style.color = sv.L > 0.5 ? "black" : "white";
+      }
+    }
+  }
+
+  function resizeFrame(frame: HTMLIFrameElement) {
+    const doc = frame.contentDocument;
+    if (doc?.body) {
+      frame.style.height = doc.body.scrollHeight + "px";
+    }
+  }
+
+  function injectCSS(frame: HTMLIFrameElement, css: string) {
+    const doc = frame.contentDocument;
+    if (!doc) return;
+    const style = doc.getElementById("theme-overrides");
+    if (style) style.textContent = css;
+  }
+
+  function update() {
+    const hue = parseInt(hueSlider.value);
+    const chroma = parseInt(chromaSlider.value) / 100;
+    hueValue.textContent = String(hue);
+    chromaValue.textContent = chroma.toFixed(2);
+
+    const lightCSS = buildOverrideCSS(light, chroma, hue, "light");
+    const darkCSS = buildOverrideCSS(dark, chroma, hue, "dark");
+
+    injectCSS(frameLight, lightCSS);
+    injectCSS(frameDark, darkCSS);
+
+    const lightDoc = frameLight.contentDocument;
+    const darkDoc = frameDark.contentDocument;
+    if (lightDoc) updateSwatches(lightDoc, light, chroma, hue, "light");
+    if (darkDoc) updateSwatches(darkDoc, dark, chroma, hue, "dark");
+
+    resizeFrame(frameLight);
+    resizeFrame(frameDark);
+
+    // Generated CSS in light-dark() format
+    let css = `/* Custom theme - Hue: ${hue}, Chroma: ${chroma.toFixed(2)} */\n`;
+    css += `:root {\n  color-scheme: light dark;\n`;
+    for (const key of Object.keys(light)) {
+      const lv = light[key];
+      const dv = dark[key];
+      const lc = resolveChroma(lv, chroma);
+      const dc = resolveChroma(dv, chroma);
+      css += `  --t-${key}: light-dark(${oklch(lv.L, lc, hue)}, ${oklch(dv.L, dc, hue)});\n`;
+    }
+    for (const [key, val] of Object.entries(semanticColors)) {
+      css += `  --t-${key}: light-dark(${oklch(val.light.L, val.light.C, val.light.H)}, ${oklch(val.dark.L, val.dark.C, val.dark.H)});\n`;
+    }
+    css += `\n`;
+    for (const [token, tokenHue] of Object.entries(syntaxHues(hue))) {
+      css += `  --t-syntax-${token}: light-dark(${oklch(0.45, chroma, tokenHue)}, ${oklch(0.75, chroma, tokenHue)});\n`;
+    }
+    css += `  --t-syntax-punctuation: var(--t-muted);\n`;
+    css += `}\n\n`;
+    css += `:root[data-theme="light"] {\n  color-scheme: light;\n}\n\n`;
+    css += `:root[data-theme="dark"] {\n  color-scheme: dark;\n}\n`;
+    output.textContent = css;
+  }
+
+  hueSlider.addEventListener("input", update);
+  chromaSlider.addEventListener("input", update);
+
+  // Wait for iframes to load before first update
+  let loaded = 0;
+  function onFrameLoad() {
+    loaded++;
+    if (loaded === 2) update();
+  }
+  frameLight.addEventListener("load", onFrameLoad);
+  frameDark.addEventListener("load", onFrameLoad);
+
+  // Re-resize on window resize
+  window.addEventListener("resize", () => {
+    resizeFrame(frameLight);
+    resizeFrame(frameDark);
+  });
+
+  copyBtn.addEventListener("click", () => {
+    navigator.clipboard.writeText(output.textContent ?? "").then(() => {
+      copyBtn.textContent = "Copied!";
+      setTimeout(() => { copyBtn.textContent = "Copy CSS to Clipboard"; }, 2000);
+    });
+  });
+</script>

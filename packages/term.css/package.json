@@ -1,0 +1,47 @@
+{
+  "name": "term.css",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "A minimal, classless CSS framework with terminal aesthetics",
+  "license": "MIT",
+  "author": "eshlox",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eshlox/term.css"
+  },
+  "keywords": [
+    "css",
+    "classless",
+    "terminal",
+    "monospace",
+    "dark-mode",
+    "framework",
+    "oklch"
+  ],
+  "main": "dist/term.min.css",
+  "style": "dist/term.min.css",
+  "files": [
+    "dist/",
+    "src/",
+    "scripts/generate-theme.js",
+    "scripts/color.js"
+  ],
+  "exports": {
+    ".": "./dist/term.min.css",
+    "./src": "./src/term.css",
+    "./themes/*": "./dist/themes/*"
+  },
+  "scripts": {
+    "build:css": "node scripts/build-css.js",
+    "build:themes": "node scripts/build-themes.js",
+    "build": "node scripts/build-css.js && node scripts/build-themes.js",
+    "theme:generate": "node scripts/generate-theme.js"
+  },
+  "bin": {
+    "termcss": "./scripts/generate-theme.js"
+  },
+  "devDependencies": {
+    "lightningcss": "^1.28.0",
+    "lightningcss-cli": "^1.28.0"
+  }
+}

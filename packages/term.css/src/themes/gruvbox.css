@@ -1,0 +1,33 @@
+/* Gruvbox theme for term.css */
+
+:root {
+  color-scheme: light dark;
+
+  --t-bg: light-dark(oklch(0.96 0.06 96), oklch(0.28 0 0));
+  --t-fg: light-dark(oklch(0.34 0.01 48), oklch(0.89 0.06 89));
+  --t-muted: light-dark(oklch(0.53 0.03 67), oklch(0.66 0.03 67));
+  --t-accent: light-dark(oklch(0.54 0.13 71), oklch(0.83 0.16 83));
+  --t-accent2: light-dark(oklch(0.47 0.08 216), oklch(0.69 0.04 170));
+  --t-surface: light-dark(oklch(0.89 0.06 89), oklch(0.34 0.01 48));
+  --t-border: light-dark(oklch(0.83 0.05 85), oklch(0.41 0.01 52));
+  --t-red: light-dark(oklch(0.44 0.18 28), oklch(0.69 0.22 30));
+  --t-yellow: light-dark(oklch(0.54 0.13 71), oklch(0.83 0.16 83));
+  --t-green: light-dark(oklch(0.53 0.11 106), oklch(0.77 0.16 111));
+
+  --t-syntax-keyword: light-dark(oklch(0.44 0.18 28), oklch(0.66 0.22 30));
+  --t-syntax-string: light-dark(oklch(0.55 0.11 106), oklch(0.77 0.16 111));
+  --t-syntax-comment: light-dark(oklch(0.62 0.03 67), oklch(0.62 0.03 67));
+  --t-syntax-function: light-dark(oklch(0.62 0.13 71), oklch(0.83 0.16 83));
+  --t-syntax-number: light-dark(oklch(0.49 0.12 344), oklch(0.71 0.10 2));
+  --t-syntax-operator: light-dark(oklch(0.51 0.16 39), oklch(0.73 0.18 52));
+  --t-syntax-type: light-dark(oklch(0.47 0.08 216), oklch(0.69 0.04 170));
+  --t-syntax-punctuation: light-dark(oklch(0.34 0.01 48), oklch(0.89 0.06 89));
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}

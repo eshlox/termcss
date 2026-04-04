@@ -1,0 +1,33 @@
+/* Monokai theme for term.css */
+
+:root {
+  color-scheme: light dark;
+
+  --t-bg: light-dark(oklch(0.97 0.01 39), oklch(0.29 0.01 318));
+  --t-fg: light-dark(oklch(0.27 0.01 321), oklch(0.99 0 0));
+  --t-muted: light-dark(oklch(0.53 0.01 350), oklch(0.67 0 0));
+  --t-accent: light-dark(oklch(0.55 0.15 64), oklch(0.89 0.14 90));
+  --t-accent2: light-dark(oklch(0.59 0.10 220), oklch(0.84 0.10 206));
+  --t-surface: light-dark(oklch(0.93 0.01 39), oklch(0.37 0.01 315));
+  --t-border: light-dark(oklch(0.79 0.01 5), oklch(0.47 0.01 314));
+  --t-red: light-dark(oklch(0.56 0.19 7), oklch(0.71 0.19 8));
+  --t-yellow: light-dark(oklch(0.52 0.11 81), oklch(0.89 0.14 90));
+  --t-green: light-dark(oklch(0.52 0.15 135), oklch(0.84 0.14 131));
+
+  --t-syntax-keyword: light-dark(oklch(0.63 0.19 7), oklch(0.71 0.19 8));
+  --t-syntax-string: light-dark(oklch(0.52 0.11 81), oklch(0.89 0.14 90));
+  --t-syntax-comment: light-dark(oklch(0.65 0.01 350), oklch(0.55 0 0));
+  --t-syntax-function: light-dark(oklch(0.57 0.15 135), oklch(0.84 0.14 131));
+  --t-syntax-number: light-dark(oklch(0.53 0.16 296), oklch(0.74 0.12 291));
+  --t-syntax-operator: light-dark(oklch(0.63 0.19 7), oklch(0.71 0.19 8));
+  --t-syntax-type: light-dark(oklch(0.59 0.10 220), oklch(0.84 0.10 206));
+  --t-syntax-punctuation: light-dark(oklch(0.27 0.01 321), oklch(0.99 0 0));
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}

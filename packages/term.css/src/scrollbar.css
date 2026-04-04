@@ -1,0 +1,25 @@
+/* Custom scrollbar - match terminal aesthetic */
+
+/* Firefox / modern standard */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--t-border) transparent;
+}
+
+/* Webkit (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--t-border);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--t-muted);
+}

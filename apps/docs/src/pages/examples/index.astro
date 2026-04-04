@@ -1,0 +1,59 @@
+---
+import Base from "../../layouts/Base.astro";
+
+const examples = [
+  {
+    title: "Developer Landing Page",
+    href: "/examples/landing",
+    description: "Personal homepage for a systems engineer. Hero section, project cards, recent writing, and contact info.",
+  },
+  {
+    title: "Technical Blog Post",
+    href: "/examples/blog-post",
+    description: "Long-form article with code blocks, benchmarks table, callouts, and structured sections.",
+  },
+  {
+    title: "Photo Blog Post",
+    href: "/examples/photo-blog",
+    description: "Travel photography post with multiple figures, captions, and a definition list of travel tips.",
+  },
+  {
+    title: "Blog Post Listing",
+    href: "/examples/blog-list",
+    description: "Blog index page with post summaries, dates, tag badges, and pagination.",
+  },
+  {
+    title: "Contact Page",
+    href: "/examples/contact",
+    description: "Company contact form with dropdowns, text fields, and office details in a definition list.",
+  },
+  {
+    title: "Tags / Categories",
+    href: "/examples/tags",
+    description: "Tag cloud with badge links and per-tag post listings.",
+  },
+  {
+    title: "Single-Page Portfolio",
+    href: "/examples/portfolio",
+    description: "Freelancer portfolio with project grid, skills cards, about section, and contact form.",
+  },
+];
+
+const sourceBase = "https://github.com/eshlox/term.css/blob/main/apps/docs/src/pages/examples";
+---
+
+<Base title="Examples">
+  <h1>Real-World Examples</h1>
+
+  <p>Full-page examples showing how term.css looks in realistic contexts. Each page has its own navigation and footer - no docs chrome. All content is fictional.</p>
+
+  <div class="t-grid">
+    {examples.map((ex) => (
+      <div class="t-card">
+        <h2><a href={ex.href}>{ex.title}</a></h2>
+        <p>{ex.description}</p>
+        <p><small><a href={`${sourceBase}/${ex.href.split("/").pop()}.astro`}>View source</a></small></p>
+      </div>
+    ))}
+  </div>
+</Base>

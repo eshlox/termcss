@@ -1,0 +1,261 @@
+---
+import Example from "../../layouts/Example.astro";
+---
+
+<Example title="Replacing Redis with SQLite for Local Caching - Terminal Dev Blog" source="blog-post">
+  <header slot="nav">
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="#">terminal dev</a></li>
+        <li><a href="#" aria-current="page">blog</a></li>
+        <li><a href="#">about</a></li>
+        <li><a href="#">contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <article>
+    <header>
+      <h1>Replacing Redis with SQLite for Local Caching</h1>
+      <p>
+        <time datetime="2026-02-18">2026-02-18</time> &middot; 10 min read &middot;
+        <span class="t-badge">PYTHON</span>
+        <span class="t-badge">SQLITE</span>
+        <span class="t-badge">PERFORMANCE</span>
+      </p>
+    </header>
+
+    <p>
+      For the past two years, our team ran Redis as the caching layer for every
+      service we deployed - including a small internal tool that processed fewer
+      than 200 requests per minute. After the third time we got paged at 2 AM
+      because the Redis instance on our staging box ran out of memory, we
+      decided it was time to reconsider whether we actually needed a separate
+      caching server for this workload.
+    </p>
+
+    <h2>The Problem</h2>
+
+    <p>
+      Redis is exceptional software. For high-throughput, distributed systems it
+      remains the obvious choice. But for our situation - a single-process
+      Python service running on one machine with modest traffic - Redis
+      introduced operational overhead that outweighed its benefits:
+    </p>
+
+    <ul>
+      <li>A separate process to monitor, restart, and upgrade</li>
+      <li>Network round-trips for every cache read and write, even on localhost</li>
+      <li>Memory consumption that grew unpredictably under our access patterns</li>
+      <li>Configuration drift between development, staging, and production</li>
+      <li>An extra dependency in our Docker Compose stack and CI pipeline</li>
+    </ul>
+
+    <p>
+      We were paying the complexity tax of a distributed system for a problem
+      that wasn't distributed.
+    </p>
+
+    <h2>Why SQLite?</h2>
+
+    <p>
+      SQLite is already linked into the Python standard library. There is no
+      server, no socket, no protocol negotiation. It stores data in a single
+      file on disk, and with WAL mode enabled, concurrent reads are
+      non-blocking. For our use case, it checked every box:
+    </p>
+
+    <ul>
+      <li><strong>Zero deployment overhead</strong> - no extra container, no sidecar, no port mapping</li>
+      <li><strong>ACID transactions</strong> - cache writes either commit fully or not at all</li>
+      <li><strong>Built-in expiry via SQL</strong> - a simple <code>WHERE expires_at > now</code> clause handles TTL</li>
+      <li><strong>Predictable memory usage</strong> - the OS page cache manages hot data automatically</li>
+      <li><strong>Trivial backups</strong> - copy a single file, or use <code>VACUUM INTO</code> for a consistent snapshot</li>
+      <li><strong>Identical behavior everywhere</strong> - same library in dev, CI, staging, and production</li>
+    </ul>
+
+    <h2>Implementation</h2>
+
+    <p>
+      The cache interface is deliberately minimal. We store serialized values
+      with an expiration timestamp and let SQLite handle the rest.
+    </p>
+
+    <pre><code>import sqlite3
+import json
+import time
+from pathlib import Path
+from contextlib import contextmanager
+
+class SQLiteCache:
+    def __init__(self, db_path: str = "cache.db"):
+        self.db_path = Path(db_path)
+        self._init_db()
+
+    def _init_db(self):
+        with self._connect() as conn:
+            conn.execute("PRAGMA journal_mode=WAL")
+            conn.execute("PRAGMA synchronous=NORMAL")
+            conn.execute("""
+                CREATE TABLE IF NOT EXISTS cache (
+                    key TEXT PRIMARY KEY,
+                    value TEXT NOT NULL,
+                    expires_at REAL NOT NULL
+                )
+            """)
+            conn.execute("""
+                CREATE INDEX IF NOT EXISTS idx_expires
+                ON cache(expires_at)
+            """)
+
+    @contextmanager
+    def _connect(self):
+        conn = sqlite3.connect(self.db_path, timeout=5.0)
+        try:
+            yield conn
+            conn.commit()
+        finally:
+            conn.close()
+
+    def get(self, key: str):
+        with self._connect() as conn:
+            row = conn.execute(
+                "SELECT value FROM cache WHERE key = ? AND expires_at > ?",
+                (key, time.time()),
+            ).fetchone()
+            return json.loads(row[0]) if row else None
+
+    def set(self, key: str, value, ttl: int = 3600):
+        with self._connect() as conn:
+            conn.execute(
+                "INSERT OR REPLACE INTO cache (key, value, expires_at) VALUES (?, ?, ?)",
+                (key, json.dumps(value), time.time() + ttl),
+            )
+
+    def delete(self, key: str):
+        with self._connect() as conn:
+            conn.execute("DELETE FROM cache WHERE key = ?", (key,))
+
+    def clear_expired(self):
+        with self._connect() as conn:
+            conn.execute("DELETE FROM cache WHERE expires_at <= ?", (time.time(),))</code></pre>
+
+    <p>
+      The <code>clear_expired</code> method runs on a background timer every
+      five minutes. In practice, expired rows are also filtered out on read, so
+      stale data is never returned even if cleanup hasn't run yet.
+    </p>
+
+    <h2>Benchmarks</h2>
+
+    <p>
+      We ran 50,000 iterations of get/set operations with 1 KB payloads on the
+      same hardware. Redis was accessed over a Unix socket to give it the best
+      possible local performance.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>Redis (Unix socket)</th>
+          <th>SQLite (WAL mode)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Read latency (p50)</td>
+          <td>0.08 ms</td>
+          <td>0.04 ms</td>
+        </tr>
+        <tr>
+          <td>Read latency (p99)</td>
+          <td>0.21 ms</td>
+          <td>0.11 ms</td>
+        </tr>
+        <tr>
+          <td>Write latency (p50)</td>
+          <td>0.10 ms</td>
+          <td>0.13 ms</td>
+        </tr>
+        <tr>
+          <td>Write latency (p99)</td>
+          <td>0.34 ms</td>
+          <td>0.42 ms</td>
+        </tr>
+        <tr>
+          <td>Memory usage (idle)</td>
+          <td>~28 MB</td>
+          <td>~1.2 MB</td>
+        </tr>
+        <tr>
+          <td>Memory usage (10k keys)</td>
+          <td>~54 MB</td>
+          <td>~8 MB</td>
+        </tr>
+        <tr>
+          <td>Setup complexity</td>
+          <td>Container + config</td>
+          <td>None (stdlib)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      Read performance favored SQLite since there was no IPC overhead. Write
+      performance was slightly slower due to filesystem sync, but well within
+      our latency budget. Memory usage was dramatically lower - SQLite keeps its
+      working set in the OS page cache, which the kernel manages adaptively.
+    </p>
+
+    <aside class="t-callout">
+      <strong>Note:</strong> Redis is still the right choice when you need
+      distributed caching across multiple nodes, pub/sub messaging, atomic
+      operations on shared data structures, or sub-millisecond writes at
+      extreme throughput. This post covers a specific case - a single-process
+      service where the cache is local to one machine.
+    </aside>
+
+    <h2>Migration Steps</h2>
+
+    <ol>
+      <li>Define the <code>SQLiteCache</code> class with the same interface as the existing Redis wrapper</li>
+      <li>Run both caches in parallel for one week, comparing hit rates and latencies</li>
+      <li>Add a feature flag to route reads through SQLite while still writing to both stores</li>
+      <li>Monitor error rates and p99 latency during the parallel phase</li>
+      <li>Disable Redis writes once SQLite metrics are confirmed stable</li>
+      <li>Remove the Redis container from the deployment manifests</li>
+      <li>Schedule a periodic <code>clear_expired</code> job and a weekly <code>VACUUM</code></li>
+      <li>Update runbooks and on-call documentation</li>
+    </ol>
+
+    <p>
+      The entire migration took three days of implementation and one week of
+      parallel validation.
+    </p>
+
+    <h2>Results</h2>
+
+    <blockquote>
+      <p>
+        After running in production for six weeks, the SQLite cache has handled
+        over 12 million requests with zero incidents. Our staging environment
+        hasn't triggered a single memory alert. Deployment is one container
+        instead of two. The on-call team stopped getting paged about cache
+        infrastructure entirely.
+      </p>
+    </blockquote>
+
+    <p>
+      The lesson here isn't that SQLite is better than Redis - it's that the
+      right tool depends on the actual problem. We spent two years maintaining
+      infrastructure for a distributed caching layer that was never distributed.
+      Sometimes the simplest solution is the one you already have.
+    </p>
+  </article>
+
+  <footer slot="footer">
+    <span>&copy; 2026 Terminal Dev</span>
+    <a href="#">RSS</a>
+  </footer>
+</Example>

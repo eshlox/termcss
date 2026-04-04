@@ -1,0 +1,33 @@
+/* Solarized theme for term.css */
+
+:root {
+  color-scheme: light dark;
+
+  --t-bg: light-dark(oklch(0.97 0.03 90), oklch(0.27 0.05 220));
+  --t-fg: light-dark(oklch(0.53 0.03 222), oklch(0.65 0.02 205));
+  --t-muted: light-dark(oklch(0.53 0.02 197), oklch(0.65 0.03 219));
+  --t-accent: light-dark(oklch(0.54 0.14 245), oklch(0.65 0.14 245));
+  --t-accent2: light-dark(oklch(0.64 0.10 187), oklch(0.64 0.10 187));
+  --t-surface: light-dark(oklch(0.93 0.03 92), oklch(0.31 0.05 220));
+  --t-border: light-dark(oklch(0.93 0.03 92), oklch(0.31 0.05 220));
+  --t-red: light-dark(oklch(0.56 0.21 27), oklch(0.68 0.21 27));
+  --t-yellow: light-dark(oklch(0.54 0.13 86), oklch(0.65 0.13 86));
+  --t-green: light-dark(oklch(0.53 0.15 119), oklch(0.64 0.15 119));
+
+  --t-syntax-keyword: light-dark(oklch(0.64 0.15 119), oklch(0.64 0.15 119));
+  --t-syntax-string: light-dark(oklch(0.64 0.10 187), oklch(0.64 0.10 187));
+  --t-syntax-comment: light-dark(oklch(0.70 0.02 197), oklch(0.52 0.03 219));
+  --t-syntax-function: light-dark(oklch(0.61 0.14 245), oklch(0.61 0.14 245));
+  --t-syntax-number: light-dark(oklch(0.59 0.20 356), oklch(0.59 0.20 356));
+  --t-syntax-operator: light-dark(oklch(0.64 0.15 119), oklch(0.64 0.15 119));
+  --t-syntax-type: light-dark(oklch(0.65 0.13 86), oklch(0.65 0.13 86));
+  --t-syntax-punctuation: light-dark(oklch(0.57 0.03 222), oklch(0.65 0.02 205));
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}

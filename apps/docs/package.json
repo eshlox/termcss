@@ -1,0 +1,17 @@
+{
+  "name": "term.css-docs",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:assets": "node scripts/copy-themes.mjs",
+    "dev": "astro dev",
+    "build": "pnpm run build:assets && astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^5.18.0",
+    "astro-expressive-code": "^0.41.7",
+    "term.css": "workspace:*"
+  }
+}

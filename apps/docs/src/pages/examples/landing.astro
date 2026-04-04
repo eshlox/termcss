@@ -1,0 +1,96 @@
+---
+import Example from "../../layouts/Example.astro";
+---
+
+<Example title="Alex Chen - Developer" source="landing">
+  <header slot="nav">
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="#" aria-current="page">alex chen</a></li>
+        <li><a href="#about">about</a></li>
+        <li><a href="#projects">projects</a></li>
+        <li><a href="#writing">writing</a></li>
+        <li><a href="#contact">contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section>
+    <h1>Alex Chen</h1>
+      <p><strong>Systems Engineer & Open Source Contributor</strong></p>
+      <p>I build reliable infrastructure and developer tools. Currently working on distributed systems at Arcway Labs. Based in Portland, OR.</p>
+    </section>
+
+    <section id="about">
+      <h2>About</h2>
+      <p>I've spent the last eight years designing backend systems that handle high-throughput workloads without falling over at 3 AM. Most of my work involves Rust and Go, building the kind of plumbing that nobody thinks about until it breaks - message brokers, caching layers, observability pipelines. Before Arcway I was at Conduit Systems, where I helped migrate a monolith to a service mesh processing 2M+ requests per second. I contribute to several open source projects and maintain a few of my own. I believe good infrastructure should be boring.</p>
+    </section>
+
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="t-grid">
+        <div class="t-card">
+          <h3>vex</h3>
+          <p><span class="t-badge">RUST</span></p>
+          <p>A fast, ergonomic CLI framework for building terminal applications. Declarative argument parsing, built-in help generation, and shell completions out of the box.</p>
+          <p><a href="#">github.com/achen/vex</a></p>
+        </div>
+        <div class="t-card">
+          <h3>scattercache</h3>
+          <p><span class="t-badge">GO</span></p>
+          <p>Distributed in-memory cache with consistent hashing and automatic rebalancing. Designed for multi-region deployments where latency matters more than perfect consistency.</p>
+          <p><a href="#">github.com/achen/scattercache</a></p>
+        </div>
+        <div class="t-card">
+          <h3>termframe</h3>
+          <p><span class="t-badge">RUST</span></p>
+          <p>A terminal UI framework built on top of crossterm. Component-based architecture, reactive state management, and a layout engine inspired by flexbox.</p>
+          <p><a href="#">github.com/achen/termframe</a></p>
+        </div>
+        <div class="t-card">
+          <h3>logmux</h3>
+          <p><span class="t-badge">PYTHON</span></p>
+          <p>Lightweight log aggregator that collects, filters, and routes structured logs from multiple services. Supports stdout, file, and syslog inputs with S3 and ClickHouse sinks.</p>
+          <p><a href="#">github.com/achen/logmux</a></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="writing">
+      <h2>Writing</h2>
+      <dl>
+        <dt><a href="#">Why I Stopped Using ORMs</a></dt>
+        <dd><time datetime="2026-02-14">2026-02-14</time> - After years of fighting query builders, I went back to raw SQL with a thin type-safe layer. Here's what I learned.</dd>
+
+        <dt><a href="#">Consistent Hashing in Practice</a></dt>
+        <dd><time datetime="2026-01-03">2026-01-03</time> - The theory is simple. The production edge cases are not. Notes from building scattercache's rebalancing algorithm.</dd>
+
+        <dt><a href="#">Structured Logging Is Not Enough</a></dt>
+        <dd><time datetime="2025-11-19">2025-11-19</time> - Structured logs solved the parsing problem but created a cardinality problem. How we tamed our observability costs.</dd>
+
+        <dt><a href="#">Building a Terminal UI Framework from Scratch</a></dt>
+        <dd><time datetime="2025-10-05">2025-10-05</time> - What happens when you try to bring React's component model to the terminal. Spoiler: layout is the hard part.</dd>
+      </dl>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>Best way to reach me is email. I also exist on a few other corners of the internet.</p>
+      <ul>
+        <li><a href="mailto:alex@alexchen.dev">alex@alexchen.dev</a></li>
+        <li><a href="#">GitHub - @achen</a></li>
+        <li><a href="#">Mastodon - @alex@hachyderm.io</a></li>
+      </ul>
+    </section>
+
+  <footer slot="footer">
+    <nav aria-label="Footer">
+      <ul>
+        <li><small>&copy; 2026 Alex Chen</small></li>
+        <li><a href="#">GitHub</a></li>
+        <li><a href="#">Mastodon</a></li>
+        <li><a href="mailto:alex@alexchen.dev">Email</a></li>
+      </ul>
+    </nav>
+  </footer>
+</Example>

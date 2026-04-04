@@ -1,0 +1,110 @@
+---
+import Base from "../layouts/Base.astro";
+import { themes, nonDefaultThemes } from "../data/themes";
+---
+
+<Base title="Themes">
+  <h1>Themes</h1>
+
+  <p>term.css ships with {nonDefaultThemes.length} themes based on the most popular terminal and editor
+  color schemes. Each theme overrides the core CSS variables - click to preview.</p>
+
+  <h2>Usage</h2>
+
+  <p>Add a theme file after the base stylesheet:</p>
+
+  <pre><code>@import "term.css";
+@import "term.css/themes/dracula.min.css";</code></pre>
+
+  <h2>Available Themes</h2>
+
+  <div class="t-grid">
+    {themes.map((t) => (
+      <div class="t-card">
+        <h3>{t.label}</h3>
+        <p><code>{t.name}.css</code></p>
+        <button data-load-theme={t.name}>Preview</button>
+      </div>
+    ))}
+    <div class="t-card">
+      <h3>Reset</h3>
+      <p>Remove theme overlay</p>
+      <button data-load-theme="none">Reset to Default</button>
+    </div>
+  </div>
+
+  <h2>Preview</h2>
+
+  <p>The theme you select above will be applied to this entire page.
+  Scroll around to see how headings, code blocks, badges, and other
+  elements look under different themes.</p>
+
+  <div class="t-callout t-info">
+    <strong>Tip</strong>
+    <p>You can also create custom themes with a single hue value.
+    See <a href="/create-a-theme">Create a Theme</a>.</p>
+  </div>
+
+  <div class="t-callout t-warn">
+    <strong>Warning</strong>
+    <p>Theme files must be loaded after the base stylesheet.</p>
+  </div>
+
+  <h3>Sample Elements</h3>
+
+  <p>
+    <span class="t-badge">STATUS</span>
+    <span class="t-badge t-error">ERROR</span>
+    <span class="t-badge t-warn">WARN</span>
+    <span class="t-badge t-success">OK</span>
+    <span class="t-badge t-info">INFO</span>
+  </p>
+
+  <blockquote>
+    <p>A blockquote to test accent border and muted text color.</p>
+  </blockquote>
+
+  <pre><code>const theme = "live preview";
+console.log("Current: " + theme);</code></pre>
+
+  <table>
+    <thead>
+      <tr><th>Variable</th><th>Purpose</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>--t-bg</td><td>Background</td></tr>
+      <tr><td>--t-fg</td><td>Foreground text</td></tr>
+      <tr><td>--t-muted</td><td>Secondary text</td></tr>
+      <tr><td>--t-accent</td><td>Primary accent</td></tr>
+      <tr><td>--t-accent2</td><td>Secondary accent</td></tr>
+      <tr><td>--t-surface</td><td>Elevated surfaces</td></tr>
+      <tr><td>--t-border</td><td>Borders, dividers</td></tr>
+      <tr><td>--t-red</td><td>Error, danger</td></tr>
+      <tr><td>--t-yellow</td><td>Warning, caution</td></tr>
+      <tr><td>--t-green</td><td>Success, confirmed</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Dark / Light</h3>
+
+  <p>Every theme supports both dark and light mode via <code>light-dark()</code>.
+  Toggle your system preference or use <code>data-theme="dark"</code> /
+  <code>data-theme="light"</code> to override.</p>
+</Base>
+
+<script>
+  const themeLink = document.createElement("link");
+  themeLink.rel = "stylesheet";
+  document.head.appendChild(themeLink);
+
+  document.querySelectorAll("[data-load-theme]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const name = btn.getAttribute("data-load-theme");
+      if (name === "none") {
+        themeLink.href = "";
+      } else {
+        themeLink.href = `/themes/${name}.css`;
+      }
+    });
+  });
+</script>

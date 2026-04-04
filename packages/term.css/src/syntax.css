@@ -1,0 +1,66 @@
+/* Syntax highlighting - maps theme variables to common highlighter classes */
+
+/* Shiki (used by Astro default) */
+pre > code .line {
+  display: inline;
+}
+
+/* Generic token classes shared across Prism / Highlight.js */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata,
+.hljs-comment {
+  color: var(--t-syntax-comment);
+}
+
+.token.keyword,
+.token.tag,
+.token.boolean,
+.token.constant,
+.hljs-keyword,
+.hljs-selector-tag {
+  color: var(--t-syntax-keyword);
+}
+
+.token.string,
+.token.char,
+.token.attr-value,
+.token.regex,
+.token.template-string,
+.hljs-string,
+.hljs-attr {
+  color: var(--t-syntax-string);
+}
+
+.token.function,
+.token.class-name,
+.hljs-title,
+.hljs-section {
+  color: var(--t-syntax-function);
+}
+
+.token.number,
+.hljs-number {
+  color: var(--t-syntax-number);
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.hljs-operator {
+  color: var(--t-syntax-operator);
+}
+
+.token.property,
+.token.attr-name,
+.token.namespace,
+.hljs-type,
+.hljs-built_in {
+  color: var(--t-syntax-type);
+}
+
+.token.punctuation,
+.hljs-punctuation {
+  color: var(--t-syntax-punctuation);
+}

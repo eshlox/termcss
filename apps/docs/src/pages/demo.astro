@@ -1,0 +1,217 @@
+---
+import Base from "../layouts/Base.astro";
+import { Code } from "astro-expressive-code/components";
+---
+
+<Base title="Demo">
+  <h1>Kitchen Sink Demo</h1>
+
+  <p>Every HTML element styled by term.css, plus all class-based components.</p>
+
+  <h2>Typography</h2>
+
+  <p>Body text in monospace at a comfortable line-height. This paragraph tests
+  <strong>bold text</strong>, <em>italic text</em>, <a href="#">links</a>,
+  <code>inline code</code>, <mark>marked text</mark>, and <small>small text</small>.</p>
+
+  <h3>Third Level Heading</h3>
+  <h4>Fourth Level Heading</h4>
+  <h5>Fifth Level Heading</h5>
+  <h6>Sixth Level Heading</h6>
+
+  <h2>Blockquote</h2>
+
+  <blockquote>
+    <p>He holds him with a skinny hand,<br>
+    'There was a ship,' quoth he.<br>
+    'Hold off! unhand me, grey-beard loon!'<br>
+    An artichoke, dropt he.</p>
+  </blockquote>
+
+  <h2>Lists</h2>
+
+  <ol>
+    <li>Carrots</li>
+    <li>Celery</li>
+    <li>Tacos
+      <ul>
+        <li>Soft</li>
+        <li>Hard</li>
+      </ul>
+    </li>
+    <li>Cucumber</li>
+  </ol>
+
+  <ul>
+    <li>Unordered item one</li>
+    <li>Unordered item two</li>
+    <li>Unordered item three</li>
+  </ul>
+
+  <h2>Table</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Power</th>
+        <th>Comment</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Carrots</td>
+        <td>9001</td>
+        <td>It's over 9000?!</td>
+      </tr>
+      <tr>
+        <td>Ramen</td>
+        <td>9002</td>
+        <td>Also over 9000?!</td>
+      </tr>
+      <tr>
+        <td>Currywurst</td>
+        <td>10000</td>
+        <td>What?!</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Code Block</h2>
+
+  <Code lang="haskell" code={`module Main where
+
+import Data.List (intercalate)
+
+hello :: String -> String
+hello s = "Hello, " <> s <> "."
+
+main :: IO ()
+main = putStrLn
+     $ intercalate "\\n"
+     $ hello <$> [ "artichoke", "alcachofa" ]`} />
+
+  <h2>Details / Summary</h2>
+
+  <details>
+    <summary>Click to expand</summary>
+    <p>This content is hidden by default. The details/summary element is styled
+    with a left border and custom triangle markers.</p>
+  </details>
+
+  <details open>
+    <summary>Already open section</summary>
+    <p>This section starts in the open state.</p>
+  </details>
+
+  <h2>Divider</h2>
+
+  <hr>
+
+  <p><em>Alcachofa</em>, if you were wondering, is artichoke in Spanish.</p>
+
+  <h2>Media</h2>
+
+  <figure>
+    <img src="https://placehold.co/600x300/1a1a2e/e0e0e0?text=term.css" alt="Placeholder">
+    <figcaption>A placeholder image demonstrating figure and figcaption</figcaption>
+  </figure>
+
+  <h2>Date</h2>
+
+  <p>Published on <time datetime="2026-03-05">05 March 2026</time></p>
+
+  <h2>Forms</h2>
+
+  <form>
+    <p>
+      <label for="name">Name</label><br>
+      <input type="text" id="name" placeholder="Your name">
+    </p>
+    <p>
+      <label for="email">Email</label><br>
+      <input type="email" id="email" placeholder="your@email.com">
+    </p>
+    <p>
+      <label for="message">Message</label><br>
+      <textarea id="message" placeholder="Write something..."></textarea>
+    </p>
+    <p>
+      <label for="option">Select</label><br>
+      <select id="option">
+        <option>Option 1</option>
+        <option>Option 2</option>
+        <option>Option 3</option>
+      </select>
+    </p>
+    <p><button type="submit">Submit</button></p>
+  </form>
+
+  <h2>Keyboard</h2>
+
+  <p>Press <kbd>Ctrl</kbd> + <kbd>C</kbd> to copy, <kbd>Ctrl</kbd> + <kbd>V</kbd> to paste.</p>
+
+  <h2>Sample Output</h2>
+
+  <p>The command returned: <samp>Hello, world!</samp></p>
+
+  <h2>Abbreviation</h2>
+
+  <p>We use <abbr title="OK Lightness Chroma Hue">OKLCH</abbr> for all color values.</p>
+
+  <h2>Components</h2>
+
+  <h3>Cards &amp; Grid</h3>
+
+  <div class="t-grid">
+    <div class="t-card">
+      <h4>Card One</h4>
+      <p>A simple card in a responsive grid.</p>
+    </div>
+    <div class="t-card">
+      <h4>Card Two</h4>
+      <p>Cards use surface background and border.</p>
+    </div>
+    <div class="t-card" style="--t-card-border: var(--t-accent)">
+      <h4>Accent Border</h4>
+      <p>Custom border via CSS variable.</p>
+    </div>
+  </div>
+
+  <h3>Badges</h3>
+
+  <p>
+    <span class="t-badge">STATUS</span>
+    <span class="t-badge">NEW</span>
+    <span class="t-badge">DRAFT</span>
+  </p>
+
+  <h3>Callouts</h3>
+
+  <div class="t-callout">
+    <strong>Note</strong>
+    <p>General information callout. The label differentiates - no color variants needed.</p>
+  </div>
+
+  <div class="t-callout">
+    <strong>Warning</strong>
+    <p>Something to watch out for.</p>
+  </div>
+
+  <h3>Task List</h3>
+
+  <ul>
+    <li><input type="checkbox" checked> Completed task</li>
+    <li><input type="checkbox" checked> Another done</li>
+    <li><input type="checkbox"> Pending task</li>
+  </ul>
+
+  <h3>Definition List</h3>
+
+  <dl>
+    <dt>term.css</dt>
+    <dd>A minimal CSS framework with terminal aesthetics</dd>
+    <dt>OKLCH</dt>
+    <dd>A perceptually uniform color space used for theming</dd>
+  </dl>
+</Base>

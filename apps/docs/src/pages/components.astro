@@ -1,0 +1,138 @@
+---
+import Base from "../layouts/Base.astro";
+import { Code } from "astro-expressive-code/components";
+---
+
+<Base title="Components">
+  <h1>Components</h1>
+
+  <p>Class-based UI patterns prefixed with <code>t-</code>. These are optional -
+  term.css works without any classes. Add these when you need richer UI.</p>
+
+  <h3>Card <code>.t-card</code></h3>
+
+  <div class="t-card">
+    <h4>Card Title</h4>
+    <p>Content inside a card with surface background and border.</p>
+  </div>
+
+  <details>
+    <summary>HTML</summary>
+    <Code lang="html" code={`<div class="t-card">
+  <h4>Card Title</h4>
+  <p>Content</p>
+</div>`} />
+  </details>
+
+  <h3>Grid <code>.t-grid</code></h3>
+
+  <div class="t-grid">
+    <div class="t-card"><p>Cell 1</p></div>
+    <div class="t-card"><p>Cell 2</p></div>
+    <div class="t-card"><p>Cell 3</p></div>
+  </div>
+
+  <details>
+    <summary>HTML</summary>
+    <Code lang="html" code={`<div class="t-grid">
+  <div class="t-card">Cell 1</div>
+  <div class="t-card">Cell 2</div>
+  <div class="t-card">Cell 3</div>
+</div>`} />
+  </details>
+
+  <h3>Badge <code>.t-badge</code></h3>
+
+  <p>
+    <span class="t-badge">STATUS</span>
+    <span class="t-badge t-error">ERROR</span>
+    <span class="t-badge t-warn">WARN</span>
+    <span class="t-badge t-success">OK</span>
+    <span class="t-badge t-info">INFO</span>
+  </p>
+
+  <details>
+    <summary>HTML</summary>
+    <Code lang="html" code={`<span class="t-badge">STATUS</span>
+<span class="t-badge t-error">ERROR</span>
+<span class="t-badge t-warn">WARN</span>
+<span class="t-badge t-success">OK</span>
+<span class="t-badge t-info">INFO</span>`} />
+  </details>
+
+  <h3>Callout <code>.t-callout</code></h3>
+
+  <div class="t-callout t-info">
+    <strong>Note</strong>
+    <p>General information.</p>
+  </div>
+
+  <div class="t-callout t-warn">
+    <strong>Warning</strong>
+    <p>Proceed with caution.</p>
+  </div>
+
+  <div class="t-callout t-error">
+    <strong>Danger</strong>
+    <p>Destructive action ahead.</p>
+  </div>
+
+  <div class="t-callout t-success">
+    <strong>Done</strong>
+    <p>Operation completed successfully.</p>
+  </div>
+
+  <details>
+    <summary>HTML</summary>
+    <Code lang="html" code={`<div class="t-callout t-warn">
+  <strong>Warning</strong>
+  <p>Content</p>
+</div>`} />
+  </details>
+
+  <h3>Semantic Colors <code>.t-error</code> <code>.t-warn</code> <code>.t-success</code> <code>.t-info</code></h3>
+
+  <p>
+    <span class="t-error">ERROR: Connection refused</span><br>
+    <span class="t-warn">WARN: Deprecated API usage</span><br>
+    <span class="t-success">OK: All tests passed</span><br>
+    <span class="t-info">INFO: Server started on port 3000</span>
+  </p>
+
+  <details>
+    <summary>HTML</summary>
+    <Code lang="html" code={`<span class="t-error">ERROR: Connection refused</span>
+<span class="t-warn">WARN: Deprecated API usage</span>
+<span class="t-success">OK: All tests passed</span>
+<span class="t-info">INFO: Server started on port 3000</span>
+
+<!-- Compose with badges -->
+<span class="t-badge t-error">ERROR</span>
+
+<!-- Compose with callouts -->
+<div class="t-callout t-warn">
+  <strong>Warning</strong>
+  <p>Content</p>
+</div>`} />
+  </details>
+
+  <h3>Bordered Table <code>.t-table-bordered</code></h3>
+
+  <table class="t-table-bordered">
+    <thead>
+      <tr><th>Command</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>build</td><td>Compile to dist/</td></tr>
+      <tr><td>dev</td><td>Dev server</td></tr>
+      <tr><td>test</td><td>Run tests</td></tr>
+    </tbody>
+  </table>
+
+  <details>
+    <summary>HTML</summary>
+    <Code lang="html" code={`<table class="t-table-bordered">
+  ...
+</table>`} />
+  </details>
+</Base>

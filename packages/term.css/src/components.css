@@ -1,0 +1,92 @@
+/* Components - class-based UI patterns */
+/* All classes prefixed with t- to avoid collisions */
+
+/* --- Cards --- */
+
+.t-card {
+  background-color: var(--t-surface);
+  border: 1px solid var(--t-card-border, var(--t-border));
+  padding: 0.75em 1em;
+  margin-block: 1lh;
+}
+
+.t-card > :first-child {
+  margin-block-start: 0;
+}
+
+.t-card > :last-child {
+  margin-block-end: 0;
+}
+
+/* --- Grid --- */
+
+.t-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 25ch), 1fr));
+  gap: 1lh;
+  margin-block: 1lh;
+}
+
+.t-grid > .t-card {
+  margin-block: 0;
+}
+
+/* --- Badge --- */
+
+.t-badge {
+  background-color: var(--t-accent2);
+  color: var(--t-bg);
+  padding-inline: 0.5em;
+  font-weight: 700;
+}
+
+/* --- Callout Box --- */
+
+.t-callout {
+  background-color: var(--t-surface);
+  border-inline-start: 3px solid var(--t-accent);
+  padding: 0.75em 1em;
+  margin-block: 1lh;
+}
+
+.t-callout > :first-child {
+  margin-block-start: 0;
+}
+
+.t-callout > :last-child {
+  margin-block-end: 0;
+}
+
+.t-callout > strong:first-child {
+  display: block;
+  color: var(--t-accent);
+}
+
+/* --- Bordered Table --- */
+
+.t-table-bordered th,
+.t-table-bordered td {
+  border: 1px solid var(--t-accent2);
+}
+
+/* --- Semantic Colors --- */
+
+.t-error { color: var(--t-red); }
+.t-warn { color: var(--t-yellow); }
+.t-success { color: var(--t-green); }
+.t-info { color: var(--t-accent); }
+
+/* Callout color variants - reset color to prevent body text inheritance */
+.t-callout.t-error { border-color: var(--t-red); color: var(--t-fg); }
+.t-callout.t-error > strong:first-child { color: var(--t-red); }
+.t-callout.t-warn { border-color: var(--t-yellow); color: var(--t-fg); }
+.t-callout.t-warn > strong:first-child { color: var(--t-yellow); }
+.t-callout.t-success { border-color: var(--t-green); color: var(--t-fg); }
+.t-callout.t-success > strong:first-child { color: var(--t-green); }
+.t-callout.t-info { border-color: var(--t-accent); color: var(--t-fg); }
+
+/* Badge color variants - reset color to keep text readable */
+.t-badge.t-error { background-color: var(--t-red); color: var(--t-bg); }
+.t-badge.t-warn { background-color: var(--t-yellow); color: var(--t-bg); }
+.t-badge.t-success { background-color: var(--t-green); color: var(--t-bg); }
+.t-badge.t-info { background-color: var(--t-accent); color: var(--t-bg); }

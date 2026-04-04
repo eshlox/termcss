@@ -1,0 +1,123 @@
+---
+import Example from "../../layouts/Example.astro";
+---
+
+<Example title="Blog - Terminal Dev" source="blog-list">
+  <header slot="nav">
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="#">terminal dev</a></li>
+        <li><a href="#" aria-current="page">blog</a></li>
+        <li><a href="#">about</a></li>
+        <li><a href="#">contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <h1>Blog</h1>
+
+    <article>
+      <h2><a href="#">Replacing Redis with SQLite for Local Caching</a></h2>
+      <small><time datetime="2026-02-18">2026-02-18</time> &middot; 6 min read</small>
+      <p>
+        <span class="t-badge">PYTHON</span>
+        <span class="t-badge">SQLITE</span>
+      </p>
+      <p>Redis is overkill for most local caching needs. SQLite with WAL mode gives you persistence, atomic writes, and zero infrastructure for single-node services.</p>
+    </article>
+
+    <hr>
+
+    <article>
+      <h2><a href="#">Zero-Downtime Deployments with SQLite and Litestream</a></h2>
+      <small><time datetime="2026-02-03">2026-02-03</time> &middot; 8 min read</small>
+      <p>
+        <span class="t-badge">DEVOPS</span>
+        <span class="t-badge">SQLITE</span>
+      </p>
+      <p>Litestream replicates your SQLite database to S3 in real time. Combined with a blue-green deploy strategy, you get zero-downtime deploys without Postgres.</p>
+    </article>
+
+    <hr>
+
+    <article>
+      <h2><a href="#">Why I Switched from Neovim to Helix</a></h2>
+      <small><time datetime="2026-01-20">2026-01-20</time> &middot; 5 min read</small>
+      <p>
+        <span class="t-badge">TOOLS</span>
+        <span class="t-badge">EDITORS</span>
+      </p>
+      <p>After years of maintaining a 500-line Neovim config, Helix gave me better defaults out of the box. Here is what I gained and what I miss.</p>
+    </article>
+
+    <hr>
+
+    <article>
+      <h2><a href="#">Building Type-Safe APIs with Hono and Zod</a></h2>
+      <small><time datetime="2026-01-08">2026-01-08</time> &middot; 7 min read</small>
+      <p>
+        <span class="t-badge">TYPESCRIPT</span>
+        <span class="t-badge">WEB</span>
+      </p>
+      <p>Hono's RPC mode combined with Zod validators gives you end-to-end type safety from route handler to client call. No code generation required.</p>
+    </article>
+
+    <hr>
+
+    <article>
+      <h2><a href="#">A Practical Guide to Nix Flakes</a></h2>
+      <small><time datetime="2025-12-15">2025-12-15</time> &middot; 12 min read</small>
+      <p>
+        <span class="t-badge">NIX</span>
+        <span class="t-badge">DEVOPS</span>
+      </p>
+      <p>Flakes finally make Nix reproducible and shareable. This guide walks through creating a development shell, building a package, and deploying with NixOS.</p>
+    </article>
+
+    <hr>
+
+    <article>
+      <h2><a href="#">Structured Logging in Go: Beyond Zerolog</a></h2>
+      <small><time datetime="2025-11-28">2025-11-28</time> &middot; 6 min read</small>
+      <p>
+        <span class="t-badge">GO</span>
+        <span class="t-badge">OBSERVABILITY</span>
+      </p>
+      <p>The standard library's slog package has matured enough to replace third-party loggers. A comparison of slog handlers and patterns for production services.</p>
+    </article>
+
+    <hr>
+
+    <article>
+      <h2><a href="#">Container Networking from Scratch</a></h2>
+      <small><time datetime="2025-11-10">2025-11-10</time> &middot; 10 min read</small>
+      <p>
+        <span class="t-badge">LINUX</span>
+        <span class="t-badge">NETWORKING</span>
+      </p>
+      <p>Building a container network with veth pairs, bridges, and iptables rules. Understanding what Docker and Podman do under the hood.</p>
+    </article>
+
+    <hr>
+
+    <article>
+      <h2><a href="#">My Terminal Setup in 2025</a></h2>
+      <small><time datetime="2025-10-22">2025-10-22</time> &middot; 4 min read</small>
+      <p>
+        <span class="t-badge">TOOLS</span>
+        <span class="t-badge">TERMINAL</span>
+      </p>
+      <p>Ghostty, fish shell, Starship prompt, and a handful of Rust CLI tools. A minimal setup that stays out of the way.</p>
+    </article>
+
+    <hr>
+
+    <nav aria-label="Pagination">
+      <p><a href="#">&larr; Older</a> &middot; <a href="#">Newer &rarr;</a></p>
+    </nav>
+
+  <footer slot="footer">
+    <span>&copy; 2026 Terminal Dev</span>
+    <a href="#">RSS</a>
+  </footer>
+</Example>
