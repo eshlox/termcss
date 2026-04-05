@@ -40,6 +40,10 @@
   "bin": {
     "termcss": "./scripts/generate-theme.js"
   },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
   "devDependencies": {
     "lightningcss": "^1.28.0",
     "lightningcss-cli": "^1.28.0"
