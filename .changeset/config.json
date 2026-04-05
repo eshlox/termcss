@@ -7,5 +7,6 @@
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["term.css-docs"]
+  "ignore": ["term.css-docs"],
+  "privatePackages": { "version": false, "tag": false }
 }

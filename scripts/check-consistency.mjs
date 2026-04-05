@@ -12,7 +12,7 @@ function fail(msg) {
 }
 
 // 1. Theme data matches source files
-const themesDir = resolve(root, "packages/term.css/src/themes");
+const themesDir = resolve(root, "packages/termcss/src/themes");
 const themeFiles = readdirSync(themesDir)
   .filter((f) => f.endsWith(".css"))
   .map((f) => basename(f, ".css"));
@@ -29,7 +29,7 @@ if (extraInData.length) fail(`themes in docs data but missing from src/: ${extra
 
 // 2. No phantom t-* classes in docs
 const componentsCSS = readFileSync(
-  resolve(root, "packages/term.css/src/components.css"),
+  resolve(root, "packages/termcss/src/components.css"),
   "utf-8",
 );
 const realClasses = [...componentsCSS.matchAll(/\.(t-[\w-]+)/g)].map((m) => m[1]);

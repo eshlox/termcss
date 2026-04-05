@@ -2,10 +2,6 @@ import { defineEcConfig } from "astro-expressive-code";
 
 export default defineEcConfig({
   themes: ["light-plus", "dark-plus"],
-  themeCssSelector: (theme) =>
-    theme.type === "light"
-      ? ':root:not([data-theme="dark"])'
-      : '[data-theme="dark"]',
   frames: false,
   styleOverrides: {
     borderRadius: "0",

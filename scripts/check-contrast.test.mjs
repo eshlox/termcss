@@ -3,10 +3,10 @@ import assert from "node:assert/strict";
 import { readdirSync, readFileSync } from "node:fs";
 import { resolve, dirname, basename } from "node:path";
 import { fileURLToPath } from "node:url";
-import { oklchToLuminance, contrastRatio } from "../packages/term.css/scripts/color.js";
+import { oklchToLuminance, contrastRatio } from "../packages/termcss/scripts/color.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const themesDir = resolve(__dirname, "../packages/term.css/src/themes");
+const themesDir = resolve(__dirname, "../packages/termcss/src/themes");
 
 function parseTheme(css) {
   const vars = {};

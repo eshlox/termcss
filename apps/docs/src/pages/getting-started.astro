@@ -18,20 +18,20 @@ import { themes, themeCount } from "../data/themes";
 
   <h3>npm</h3>
 
-  <Code lang="sh" code={`npm install term.css`} />
+  <Code lang="sh" code={`npm install @eshlox/termcss`} />
 
   <p>Then import in your CSS or bundler:</p>
 
-  <Code lang="css" code={`@import "term.css";`} />
+  <Code lang="css" code={`@import "@eshlox/termcss";`} />
 
   <p>Or link in HTML:</p>
 
-  <Code lang="html" code={`<link rel="stylesheet" href="node_modules/term.css/dist/term.min.css">`} />
+  <Code lang="html" code={`<link rel="stylesheet" href="node_modules/@eshlox/termcss/dist/term.min.css">`} />
 
   <h3>Download</h3>
 
   <p>Download <code>term.css</code> or <code>term.min.css</code> from the
-  <a href="https://github.com/eshlox/term.css/releases">GitHub releases page</a>
+  <a href="https://github.com/eshlox/termcss/releases">GitHub releases page</a>
   and include it in your project.</p>
 
   <h2>Basic Usage</h2>
@@ -45,7 +45,7 @@ import { themes, themeCount } from "../data/themes";
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Site</title>
-  <link rel="stylesheet" href="node_modules/term.css/dist/term.min.css">
+  <link rel="stylesheet" href="node_modules/@eshlox/termcss/dist/term.min.css">
 </head>
 <body>
   <header>
@@ -68,8 +68,8 @@ import { themes, themeCount } from "../data/themes";
   <p>term.css includes a default theme and {themeCount - 1} optional themes. To use a theme, add a second stylesheet
   after the base:</p>
 
-  <Code lang="css" code={`@import "term.css";
-@import "term.css/themes/dracula.min.css";`} />
+  <Code lang="css" code={`@import "@eshlox/termcss";
+@import "@eshlox/termcss/themes/dracula.min.css";`} />
 
   <p>Available themes: {themes.map((t, i) => <><code>{t.name}</code>{i < themes.length - 1 ? ", " : "."}</>)}</p>
 
@@ -98,7 +98,7 @@ import { themes, themeCount } from "../data/themes";
 
   <Code lang="astro" code={`---
 // src/layouts/Base.astro
-import "term.css";
+import "@eshlox/termcss";
 ---
 <html lang="en">
 <head></head>

@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 import { execFileSync } from "node:child_process";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const generatorPath = resolve(__dirname, "../packages/term.css/scripts/generate-theme.js");
+const generatorPath = resolve(__dirname, "../packages/termcss/scripts/generate-theme.js");
 const playgroundPath = resolve(__dirname, "../apps/docs/src/pages/playground.astro");
 const outPath = resolve(__dirname, "../.tmp-parity-test.css");
 

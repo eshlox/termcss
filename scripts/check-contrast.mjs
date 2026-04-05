@@ -1,10 +1,10 @@
 import { readdirSync, readFileSync } from "fs";
 import { resolve, dirname, basename } from "path";
 import { fileURLToPath } from "url";
-import { oklchToLuminance, contrastRatio } from "../packages/term.css/scripts/color.js";
+import { oklchToLuminance, contrastRatio } from "../packages/termcss/scripts/color.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const themesDir = resolve(__dirname, "../packages/term.css/src/themes");
+const themesDir = resolve(__dirname, "../packages/termcss/src/themes");
 
 function parseTheme(css) {
   const vars = {};

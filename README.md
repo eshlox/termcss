@@ -9,19 +9,19 @@ Designed for blogs, docs, personal sites, and technical writing. Not a component
 ## Quick Start
 
 ```bash
-npm install term.css
+npm install @eshlox/termcss
 ```
 
 Import in your CSS or bundler:
 
 ```css
-@import "term.css";
+@import "@eshlox/termcss";
 ```
 
 Or link directly in HTML:
 
 ```html
-<link rel="stylesheet" href="node_modules/term.css/dist/term.min.css">
+<link rel="stylesheet" href="node_modules/@eshlox/termcss/dist/term.min.css">
 ```
 
 ## Features
@@ -42,8 +42,8 @@ Or link directly in HTML:
 Add a theme after the base stylesheet:
 
 ```css
-@import "term.css";
-@import "term.css/themes/dracula.min.css";
+@import "@eshlox/termcss";
+@import "@eshlox/termcss/themes/dracula.min.css";
 ```
 
 Available: `dracula`, `nord`, `solarized`, `one-dark`, `monokai`, `tokyo-night`, `catppuccin`, `rose-pine`, `gruvbox`, `everforest`, `github`, `kanagawa`.
@@ -51,7 +51,7 @@ Available: `dracula`, `nord`, `solarized`, `one-dark`, `monokai`, `tokyo-night`,
 ### Generate a custom theme
 
 ```bash
-npx termcss --hue 200 --name ocean
+npx @eshlox/termcss --hue 200 --name ocean
 ```
 
 The generator validates WCAG AA contrast ratios and fails if any pair doesn't meet the threshold.

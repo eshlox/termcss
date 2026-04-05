@@ -3,18 +3,18 @@
 ## Development Setup
 
 ```bash
-git clone https://github.com/eshlox/term.css.git
+git clone https://github.com/eshlox/termcss.git
 cd term.css
 pnpm install
 pnpm build
 ```
 
-Open `packages/term.css/test/index.html` in a browser to see the visual test page.
+Open `packages/termcss/test/index.html` in a browser to see the visual test page.
 
 ## Project Structure
 
 ```
-packages/term.css/        # CSS library (published to npm)
+packages/termcss/        # CSS library (published to npm)
   src/
     term.css              # Entry point (imports all modules)
     font.css              # JetBrains Mono web font declarations
@@ -52,14 +52,14 @@ scripts/                  # Root-level monorepo scripts
 1. Generate a starting point:
 
 ```bash
-node packages/term.css/scripts/generate-theme.js --hue <0-360> --name <name>
+node packages/termcss/scripts/generate-theme.js --hue <0-360> --name <name>
 ```
 
 2. The generator creates `./<name>.css` in the current directory (use `--out` for a custom path) with `light-dark()` values for both modes.
 
 3. The generator validates WCAG AA contrast ratios. If any fail, it exits with an error - fix the lightness values until all pass.
 
-4. Test your theme by opening `packages/term.css/test/index.html` and adding a `<link>` to your theme file.
+4. Test your theme by opening `packages/termcss/test/index.html` and adding a `<link>` to your theme file.
 
 ## Code Style
 
@@ -75,7 +75,7 @@ node packages/term.css/scripts/generate-theme.js --hue <0-360> --name <name>
 1. Fork the repo and create a branch
 2. Make your changes
 3. Run `pnpm build` to verify the build succeeds
-4. Open `packages/term.css/test/index.html` and verify visually
+4. Open `packages/termcss/test/index.html` and verify visually
 5. For themes: ensure all contrast ratios pass
 6. Submit a PR with a clear description of what changed
 

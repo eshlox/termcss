@@ -1,5 +1,5 @@
 {
-  "name": "term.css",
+  "name": "@eshlox/termcss",
   "version": "0.1.0",
   "type": "module",
   "description": "A minimal, classless CSS framework with terminal aesthetics",
@@ -7,7 +7,7 @@
   "author": "eshlox",
   "repository": {
     "type": "git",
-    "url": "https://github.com/eshlox/term.css"
+    "url": "https://github.com/eshlox/termcss"
   },
   "keywords": [
     "css",

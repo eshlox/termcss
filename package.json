@@ -9,15 +9,15 @@
     ]
   },
   "scripts": {
-    "build": "pnpm --filter term.css build && pnpm --filter term.css-docs build",
-    "build:css": "pnpm --filter term.css build:css",
-    "build:themes": "pnpm --filter term.css build:themes",
+    "build": "pnpm --filter @eshlox/termcss build && pnpm --filter term.css-docs build",
+    "build:css": "pnpm --filter @eshlox/termcss build:css",
+    "build:themes": "pnpm --filter @eshlox/termcss build:themes",
     "dev": "pnpm --filter term.css-docs dev",
-    "test": "node --test packages/term.css/scripts/*.test.js scripts/*.test.mjs",
+    "test": "node --test packages/termcss/scripts/*.test.js scripts/*.test.mjs",
     "check": "node scripts/check-consistency.mjs && node scripts/check-contrast.mjs",
     "check:contrast": "node scripts/check-contrast.mjs",
     "changeset": "changeset",
-    "release": "pnpm --filter term.css build && changeset publish"
+    "release": "pnpm --filter @eshlox/termcss build && changeset publish"
   },
   "devDependencies": {
     "@changesets/cli": "^2.30.0"

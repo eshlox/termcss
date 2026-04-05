@@ -1,5 +1,5 @@
 ---
-import "term.css";
+import "@eshlox/termcss";
 
 interface Props {
   title: string;
@@ -44,7 +44,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
   <footer>
     <span>&copy; 2026 term.css</span>
     <span>MIT License</span>
-    <a href="https://github.com/eshlox/term.css">GitHub</a>
+    <a href="https://github.com/eshlox/termcss">GitHub</a>
   </footer>
   <script>
     document.querySelector("nav > button[aria-expanded]")?.addEventListener("click", (e) => {

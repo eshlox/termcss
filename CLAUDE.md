@@ -3,7 +3,7 @@
 Minimal, classless CSS framework with terminal aesthetics. pnpm monorepo.
 
 ## Project Structure
-- `packages/term.css/` - The CSS library (published to npm)
+- `packages/termcss/` - The CSS library (published to npm)
   - `src/` - Source CSS files (modular, imported by `src/term.css`)
     - `font.css` - JetBrains Mono web font declarations
     - `reset.css`, `base.css`, `components.css`, `accessibility.css`
@@ -36,5 +36,5 @@ Minimal, classless CSS framework with terminal aesthetics. pnpm monorepo.
 - Lightning CSS handles bundling, minification, autoprefixing, OKLCH fallbacks
 
 ## Testing
-- Open `packages/term.css/test/index.html` in a browser to visually verify all elements
+- Open `packages/termcss/test/index.html` in a browser to visually verify all elements
 - Check contrast ratios when modifying color values (WCAG 2.1 AA: 4.5:1 normal, 3:1 large)

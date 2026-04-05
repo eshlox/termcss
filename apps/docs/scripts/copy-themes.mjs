@@ -3,7 +3,7 @@ import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const dist = resolve(__dirname, "../../../packages/term.css/dist");
+const dist = resolve(__dirname, "../../../packages/termcss/dist");
 const pub = resolve(__dirname, "../public");
 const themesOut = resolve(pub, "themes");
 

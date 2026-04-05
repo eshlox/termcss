@@ -14,17 +14,17 @@ importers:
 
   apps/docs:
     dependencies:
+      '@eshlox/termcss':
+        specifier: workspace:*
+        version: link:../../packages/termcss
       astro:
         specifier: ^5.18.0
         version: 5.18.0(lightningcss@1.31.1)(rollup@4.59.0)(typescript@5.9.3)
       astro-expressive-code:
         specifier: ^0.41.7
         version: 0.41.7(astro@5.18.0(lightningcss@1.31.1)(rollup@4.59.0)(typescript@5.9.3))
-      term.css:
-        specifier: workspace:*
-        version: link:../../packages/term.css
 
-  packages/term.css:
+  packages/termcss:
     devDependencies:
       lightningcss:
         specifier: ^1.28.0
