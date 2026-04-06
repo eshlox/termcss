@@ -1,3 +1,14 @@
 packages:
   - "packages/*"
   - "apps/*"
+
+allowBuilds:
+  esbuild: true
+  lightningcss-cli: true
+  sharp: true
+
+strictDepBuilds: true
+minimumReleaseAge: 10080
+minimumReleaseAgeExclude:
+  - "@eshlox/*"
+trustPolicy: no-downgrade

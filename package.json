@@ -1,13 +1,6 @@
 {
   "private": true,
   "packageManager": "pnpm@10.32.1",
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "lightningcss-cli",
-      "sharp"
-    ]
-  },
   "scripts": {
     "build": "pnpm --filter @eshlox/termcss build && pnpm --filter term.css-docs build",
     "build:css": "pnpm --filter @eshlox/termcss build:css",
