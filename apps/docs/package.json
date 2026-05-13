@@ -10,7 +10,7 @@
     "preview": "astro preview"
   },
   "dependencies": {
-    "astro": "^5.18.0",
+    "astro": "^6.1.10",
     "astro-expressive-code": "^0.41.7",
     "@eshlox/termcss": "workspace:*"
   }
